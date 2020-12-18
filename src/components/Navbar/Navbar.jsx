@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "./Navbar.module.css";
 
-import { Switch, Route, Link } from "react-router-dom";
-
-
+import { Switch, Route, NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -11,22 +9,34 @@ function Navbar() {
       <nav>
         <ul>
           <li>
-            <Link to="/customers">Customers</Link>
+            <NavLink activeClassName={styles.active} to="/customers">
+              Customers
+            </NavLink>
           </li>
           <li>
-            <Link to="/technicians">Technicians</Link>
+            <NavLink activeClassName={styles.active} to="/technicians">
+              Technicians
+            </NavLink>
           </li>
           <li>
-            <Link to="/schedule">Schedule</Link>
+            <NavLink activeClassName={styles.active} to="/schedule">
+              Schedule
+            </NavLink>
           </li>
           <li>
-            <Link to="/boilers">Boilers</Link>
+            <NavLink activeClassName={styles.active} to="/boilers">
+              Boilers
+            </NavLink>
           </li>
           <li>
-            <Link to="/settings">Settings</Link>
+            <NavLink activeClassName={styles.active} to="/settings">
+              Settings
+            </NavLink>
           </li>
           <li>
-            <Link to="/reports">Reports</Link>
+            <NavLink activeClassName={styles.active} to="/reports">
+              Reports
+            </NavLink>
           </li>
         </ul>
       </nav>

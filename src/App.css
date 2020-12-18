@@ -4,3 +4,11 @@
   box-sizing: border-box;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+:root {
+  --grey-bg: rgb(35, 47, 62);
+  --orange-bg: rgb(252, 98, 37);
+  --white: rgb(250, 250, 250);
+  --font-color-primary: rgb(35, 47, 62);
+  --font-color-secundary: rgb(252, 98, 37);
+}
