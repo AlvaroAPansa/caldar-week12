@@ -4,6 +4,7 @@ import Header from "../../components/Header/Header";
 import ListHeader from "./List/ListHeader/ListHeader";
 import SearchInput from "./List/SearchInput/SearchInput";
 import CustomerItem from "./List/CustomerItem/CustomerItem";
+import AddButton from "./List/AddButton/AddButton";
 
 function Customers() {
   return (
@@ -20,6 +21,7 @@ function Customers() {
           </li>
         </ul>
       </div>
+      <AddButton />
     </div>
   );
 }
