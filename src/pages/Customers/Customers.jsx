@@ -3,6 +3,7 @@ import styles from "./Customers.module.css";
 import Header from "../../components/Header/Header";
 import ListHeader from "./List/ListHeader/ListHeader";
 import SearchInput from "./List/SearchInput/SearchInput";
+import CustomerItem from "./List/CustomerItem/CustomerItem";
 
 function Customers() {
   return (
