@@ -1,4 +1,10 @@
 
 .container {
-  padding: '0px 20px';
+  display: flex;
+  justify-content: flex-end;
+  padding: 40px 5px 10px 0px;
+}
+.inputBox {
+  border-style: none;
+  border-bottom: 2px solid grey;
 }

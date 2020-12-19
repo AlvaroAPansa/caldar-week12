@@ -7,14 +7,9 @@ function SearchInput() {
         <i className='material-icons'>
           search
         </i>
-        <input style={searchInputStyle} type='text' placeholder="Search" /> 
+        <input className={styles.inputBox} type='text' placeholder="Search" /> 
       </div>
     )
   }
-
-const searchInputStyle = {
-  borderStyle: 'none',
-  borderBottom: '2px solid grey'
-}
 
 export default SearchInput;

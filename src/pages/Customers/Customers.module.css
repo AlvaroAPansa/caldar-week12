@@ -3,9 +3,9 @@
   flex: 1;
 }
 .listBox {
-  /*margin: 'auto';
-  padding: '60px 0px 0px 0px';
-  width: '90%';
-  height: '500px';
-  box-shadow: '7px 7px 5px grey';*/
+  background-color: chartreuse;
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  box-shadow: 7px 7px 5px grey;
 }
