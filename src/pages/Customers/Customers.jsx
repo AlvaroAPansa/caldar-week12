@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./Customers.module.css";
 import Header from "../../components/Header/Header";
-import SearchInput from "./SearchInput/SearchInput";
+import ListHeader from "./List/ListHeader/ListHeader";
+import SearchInput from "./List/SearchInput/SearchInput";
 
 function Customers() {
   return (
@@ -14,7 +15,7 @@ function Customers() {
             <ListHeader />
           </lh>
           <li>
-
+            <CustomerItem />
           </li>
         </ul>
       </div>
