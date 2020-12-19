@@ -1,0 +1,29 @@
+/* */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  min-width: 300px;
+  background-color: var(--grey-bg);
+}
+
+a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+.active {
+  color: var(--font-color-secundary);
+}
+
+li {
+  list-style: none;
+  text-align: center;
+}
