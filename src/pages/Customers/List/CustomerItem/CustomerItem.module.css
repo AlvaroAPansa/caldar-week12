@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  padding: 4px 0px;
+  border-bottom: 1px solid grey;
+}
+.id {
+  flex-basis: 5%;
+}
+.name {
+  flex-basis: 17%;
+}
+.actions {
+  flex-basis: 10%;
+}

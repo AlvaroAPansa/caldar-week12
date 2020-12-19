@@ -3,15 +3,17 @@ import styles from "./ListHeader.module.css";
 
 function ListHeader() {
   return (
-    <div className={styles.container}>
-      <p className={styles.id}>ID</p>
-      <p className={styles.name}>Business Name</p>
-      <p className={styles.name}>Email</p>
-      <p className={styles.name}>Phone</p>
-      <p className={styles.name}>Contact</p>
-      <p className={styles.name}>Fiscal Address</p>
-      <p className={styles.actions}>Actions</p>
-    </div>
+    <thead className={styles.container}>
+      <tr>
+        <th className={styles.id}>ID</th>
+        <th className={styles.name}>Business Name</th>
+        <th className={styles.name}>Email</th>
+        <th className={styles.name}>Phone</th>
+        <th className={styles.name}>Contact</th>
+        <th className={styles.name}>Fiscal Address</th>
+        <th className={styles.actions}>Actions</th>
+      </tr>
+    </thead>
   )
 }
 
