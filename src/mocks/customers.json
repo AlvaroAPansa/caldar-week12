@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "customerType": "particular",
+    "businessName": "eBay",
+    "email": "ecallingham0@ebay.com",
+    "phone": "345-532-888",
+    "contact": "Ernst Callingham",
+    "buidingsId": [100, 8, 45, 36, 4, 99, 23, 55, 18, 10],
+    "fiscalAddress": "5260 Mallory Crossing"
+  },
+  {
+    "id": 2,
+    "customerType": "particular",
+    "businessName": "Pure Volume",
+    "email": "hvanyukhin1@purevolume.com",
+    "phone": "345-532-523",
+    "contact": "Hvanyu Khin",
+    "buidingsId": [70, 93, 39, 51, 86, 28, 47, 76, 64],
+    "fiscalAddress": "8 Donald Lane"
+  },
+  {
+    "id": 3,
+    "customerType": "business",
+    "businessName": "MTV",
+    "email": "gpaulon2@mtv.com",
+    "phone": "345-532-744",
+    "contact": "Guillermo Paulon",
+    "buidingsId": [38, 29, 48, 90, 42, 23],
+    "fiscalAddress": "7 Forest Dale Lane"
+  },
+  {
+    "id": 4,
+    "customerType": "business",
+    "businessName": "EPA",
+    "email": "calentyev3@epa.gov",
+    "phone": "345-532-123",
+    "contact": "Calen Tyev",
+    "buidingsId": [79, 94, 57, 54, 23, 46, 55],
+    "fiscalAddress": "959 Springview Hill"
+  },
+  {
+    "id": 5,
+    "customerType": "particular",
+    "businessName": "Tripod",
+    "email": "ltomicki4@tripod.com",
+    "phone": "345-532-887",
+    "contact": "Leonard Tomicki",
+    "buidingsId": [13, 86],
+    "fiscalAddress": "08 Kings Hill"
+  },
+  {
+    "id": 6,
+    "customerType": "particular",
+    "businessName": "See Saa",
+    "email": "wwoolstenholmes5@seesaa.net",
+    "phone": "345-532-159",
+    "contact": "Wolmsten Holmes",
+    "buidingsId": [6, 64, 36],
+    "fiscalAddress": "53 Southridge Avenue"
+  },
+  {
+    "id": 7,
+    "customerType": "business",
+    "businessName": "Merriam Webster",
+    "email": "rwhimp6@merriam-webster.com",
+    "phone": "345-532-332",
+    "contact": "Rowan Whimp",
+    "buidingsId": [36, 83, 87, 29, 53, 72, 26, 7],
+    "fiscalAddress": "20 Boyd Court"
+  },
+  {
+    "id": 8,
+    "customerType": "business",
+    "businessName": "Click Bank",
+    "email": "czolini7@clickbank.net",
+    "phone": "345-532-735",
+    "contact": "Caroline Zolini",
+    "buidingsId": [55, 34, 10, 4],
+    "fiscalAddress": "97 John Wall Parkway"
+  },
+  {
+    "id": 9,
+    "customerType": "particular",
+    "businessName": "Open Source",
+    "email": "cnoice8@opensource.org",
+    "phone": "345-532-985",
+    "contact": "Christen Noice",
+    "buidingsId": [10, 100, 73, 97, 25, 21, 56, 20, 19],
+    "fiscalAddress": "26 Cordelia Center"
+  }
+]
