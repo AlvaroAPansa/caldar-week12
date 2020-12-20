@@ -1,0 +1,18 @@
+.container {
+  background-color: var(--grey-bg);
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+}
+.formTitle {
+  display: inline;
+}
+.closeButton {
+  margin: 2px 0px;
+  border-style: none;
+  float:right;
+  background-color: transparent;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}

@@ -1,11 +1,7 @@
-/* */
-table {
+.container {
   width: 100%;
 }
-.container {
-  flex: 1;
-}
-.listBox {
+.formBox {
   width: 90%;
   margin: auto;
   margin-top: 20px;
