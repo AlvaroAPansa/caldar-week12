@@ -1,4 +1,5 @@
 import react from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import styles from "./CustomerItem.module.css";
 
 function CustomerItem( {customer} ) {
@@ -25,9 +26,13 @@ function CustomerItem( {customer} ) {
           {customer.fiscalAddress}
         </td>
         <td className={styles.actions}>
-          <i className='material-icons'>
-            create
-          </i>
+          <Router>
+            <Link to="/addcustomer">
+              <i className='material-icons'>
+                create
+              </i>
+            </Link>
+          </Router>
           <i className='material-icons'>
             delete
           </i>

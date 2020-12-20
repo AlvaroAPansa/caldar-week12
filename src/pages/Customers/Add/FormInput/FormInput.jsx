@@ -5,7 +5,7 @@ function FormInput( {name, type} ) {
   return (
     <div className={styles.container}>
     <label htmlFor={name}>
-      <div className={styles.title}>
+      <div>
         {name}
       </div>
       <input type={type} id={name} name={name} className={styles.inputField} />

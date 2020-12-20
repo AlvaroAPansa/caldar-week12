@@ -8,9 +8,10 @@
   display: inline;
 }
 .closeButton {
-  margin: 2px 0px;
+  margin: 0px 0px;
+  width: 20px;
   border-style: none;
-  float:right;
+  float: right;
   background-color: transparent;
   cursor: pointer;
   color: white;

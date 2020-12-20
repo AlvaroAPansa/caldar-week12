@@ -1,7 +1,7 @@
 .container {
-/*  display: 'flex',
-  flexWrap: 'wrap',
-  justifyContent: 'center',
-  flexBasis: '50%',
-  padding: '20px 0px'*/
+  flex-basis: 40%;
+  margin: 5px;
+}
+.inputField {
+  width: 100%;
 }

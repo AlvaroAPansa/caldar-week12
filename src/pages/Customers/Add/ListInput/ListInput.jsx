@@ -8,7 +8,7 @@ function ListInput( {name} ) {
         <div>
           {name}
         </div>
-        <input list='types' id={name} name={name} />
+        <input list='types' id={name} name={name} className={styles.inputField} />
       </label>
       <datalist id='types'>
         <option value='Particular' />
