@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+}
+.formBox {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  box-shadow: 7px 7px 5px grey;
+}

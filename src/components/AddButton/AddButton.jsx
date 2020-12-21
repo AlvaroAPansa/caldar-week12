@@ -1,4 +1,3 @@
-import react from "react";
 import styles from "./AddButton.module.css";
 import { Link } from "react-router-dom";
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Customers.module.css";
 import Header from "../../components/Header/Header";
-import ListHeader from "./List/ListHeader/ListHeader";
-import SearchInput from "./List/SearchInput/SearchInput";
-import ItemsList from "./List/ItemsList/ItemsList";
-import AddButton from "./List/AddButton/AddButton";
+import ListHeader from "../../components/ListHeader/ListHeader";
+import SearchInput from "../../components/SearchInput/SearchInput";
+import ItemsList from "../../components/ItemsList/ItemsList";
+import AddButton from "../../components/AddButton/AddButton";
 
 function Customers() {
   const [customers, setCustomers] = useState([]);

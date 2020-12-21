@@ -12,6 +12,7 @@ import Settings from "../../pages/Settings/Settings";
 import Technicians from "../../pages/Technicians/Technicians";
 import Home from "../../pages/Home/Home";
 import EditCustomer from "../../pages/Customers/Edit/EditCustomer";
+import DeleteCustomer from "../../pages/Customers/Delete/DeleteCustomer"
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
@@ -27,6 +28,7 @@ function MainLayout() {
         <Route path="/customers" exact component={Customers} />
         <Route path="/addcustomer" exact component={AddCustomer} />
         <Route path="/editcustomer" exact component={EditCustomer} />
+        <Route path="/deletecustomer" exact component={DeleteCustomer} />
 
         <Route path="/reports/:id" component={Reports} />
         <Route path="/reports" exact component={Reports} />

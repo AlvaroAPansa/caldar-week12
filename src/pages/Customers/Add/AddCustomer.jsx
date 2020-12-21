@@ -1,17 +1,17 @@
 import react from "react";
 import styles from "./AddCustomer.module.css";
 import Header from "../../../components/Header/Header";
-import FormHeader from "./FormHeader/FormHeader";
-import FormInput from "./FormInput/FormInput";
-import ListInput from "./ListInput/ListInput";
-import FormButton from "./FormButton/FormButton";
+import FormHeader from "../../../components/FormHeader/FormHeader";
+import FormInput from "../../../components/FormInput/FormInput";
+import ListInput from "../../../components/ListInput/ListInput";
+import FormButton from "../../../components/FormButton/FormButton";
 
 function AddCustomer() {
   return (
     <div className={styles.container}>
       <Header title="Customers" />
       <div className={styles.formBox}>
-        <FormHeader />
+        <FormHeader type='Add a new' />
         <form>
           <FormInput name='ID' type='text' />
           <FormInput name='Contact Name' type='text' />

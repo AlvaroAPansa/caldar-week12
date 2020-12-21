@@ -5,6 +5,7 @@ button {
   width: 80%;
   color: #fff;
   background-color: var(--grey-bg);
+  cursor: pointer;
 }
 .container {
   flex-basis: 40%;
