@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, useRouteMatch } from "react-router-dom";
 import styles from "./CustomerItem.module.css";
 
 function CustomerItem( {customer} ) {
+  let match = useRouteMatch();
 
   return (
     <tbody>
@@ -26,12 +27,12 @@ function CustomerItem( {customer} ) {
         </td>
         <td className={styles.actions}>
           <Router>
-            <Link to="/editcustomer" className={styles.iconContainer}>
+            <Link to={`/customers/edit/:${customer.id}`} className={styles.iconContainer}>
               <i className='material-icons'>
                 create
               </i>
             </Link>
-            <Link to='/deletecustomer' className={styles.iconContainer}>
+            <Link to={`${match.url}/delete/:${customer.id}`} className={styles.iconContainer}>
               <i className='material-icons'>
                 delete
               </i>
