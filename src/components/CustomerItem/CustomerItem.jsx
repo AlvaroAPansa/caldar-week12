@@ -26,18 +26,16 @@ function CustomerItem( {customer} ) {
           {customer.fiscalAddress}
         </td>
         <td className={styles.actions}>
-          <Router>
-            <Link to={`/customers/edit/:${customer.id}`} className={styles.iconContainer}>
+            <Link to={`/customers/edit/${customer.id}`} className={styles.iconContainer}>
               <i className='material-icons'>
                 create
               </i>
             </Link>
-            <Link to={`${match.url}/delete/:${customer.id}`} className={styles.iconContainer}>
+            <Link to={"/customers/delete/${customer.id}"} className={styles.iconContainer}>
               <i className='material-icons'>
                 delete
               </i>
             </Link>
-          </Router>
         </td>
       </tr>
     </tbody>

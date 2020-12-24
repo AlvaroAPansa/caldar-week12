@@ -6,7 +6,12 @@ import FormInput from "../../../components/FormInput/FormInput";
 import ListInput from "../../../components/ListInput/ListInput";
 import FormButton from "../../../components/FormButton/FormButton";
 
-function AddCustomer() {
+function AddCustomer( { newCustomer }) {
+  
+  newCustomer = customer => {
+
+  }
+
   return (
     <div className={styles.container}>
       <Header title="Customers" />
@@ -19,9 +24,9 @@ function AddCustomer() {
           <FormInput name='Fiscal Address' type='text' />
           <FormInput name='Email' type='email' />
           <FormInput name='Buildings' type='text' />
-          <FormButton name='Add Building' />
-          <FormButton name='Edit Building' />
-          <FormButton name='Confirm' />
+          <FormButton name='Add Building' type='button' />
+          <FormButton name='Edit Building' type='button' />
+          <FormButton name='Confirm' type='submit' newCustomer={newCustomer} />
       </form>
       </div>
     </div>

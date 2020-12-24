@@ -1,10 +1,9 @@
-import react from "react";
 import styles from "./FormButton.module.css";
 
-function FormButton( {name} ) {
+function FormButton( {name, type} ) {
   return (
     <div className={styles.container}>
-      <button type='button'>
+      <button type={type}>
         {name}
       </button>
     </div>

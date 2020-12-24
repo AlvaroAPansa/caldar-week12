@@ -1,4 +1,3 @@
-import react from "react";
 import styles from "./FormHeader.module.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
@@ -8,13 +7,11 @@ function FormHeader( {type} ) {
       <div className={styles.formTitle}>
         {type} Customer
       </div>
-      <Router>
-        <Link to='/customers'>
+        <Link to="/customers">
             <button type='button' className={styles.closeButton}>
               X
             </button>
         </Link>
-      </Router>
     </div>
   )
 }

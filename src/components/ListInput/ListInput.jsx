@@ -1,7 +1,9 @@
-import react from "react";
 import styles from "./ListInput.module.css";
 
 function ListInput( {name} ) {
+  let idName = name.toLowerCase();
+  idName = idName.substring(0,idName.indexOf(' ')) + idName.substring(idName.indexOf(' ')+1);
+
   return (
     <div className={styles.container}>
       <label htmlFor={name}>
