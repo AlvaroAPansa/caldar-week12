@@ -1,0 +1,13 @@
+button {
+  margin: 5px;
+  padding: 5px;
+  border-style: none;
+  width: 80%;
+  color: #fff;
+  background-color: var(--font-color-secundary);
+  cursor: pointer;
+}
+.container {
+  flex-basis: 40%;
+  text-align: center;
+}
