@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./AddCustomer.module.css";
 import FormHeader from "../../../components/FormHeader/FormHeader";
 import FormInput from "../../../components/FormInput/FormInput";
@@ -6,38 +6,28 @@ import ListInput from "../../../components/ListInput/ListInput";
 import FormButton from "../../../components/FormButton/FormButton";
 import SubmitButton from "../../../components/SubmitButton/SubmitButton";
 
-function AddCustomer() {
-  const newCustomerInit = {
-    id: null,
-    customerType: "",
-    email: "",
-    contactName: "",
-    buidings: [],
-    fiscalAddress: ""
-  };
-
-  const [newCustomer, setNewCustomer] = useState ([newCustomerInit]);
+function AddCustomer( { setNewCustomer } ) {
 
   const newCustomerLoad = (e) => {
     e.preventDefault();
 
-    let idValue = document.getElementById("id").value;
+    let idValue = parseInt(document.getElementById("id").value);
     let customerTypeValue = document.getElementById("customerType").value;
     let emailValue = document.getElementById("email").value;
     let contactNameValue = document.getElementById("contactName").value;
-    let buildingsValue = document.getElementById("buildings").value;
+    let buildingsValue = [parseInt(document.getElementById("buildings").value)];
     let fiscalAddressValue = document.getElementById("fiscalAddress").value;
     
-    const newCustomerData = {
-      id: idValue,
-      customerType: customerTypeValue,
-      email: emailValue,
-      contactName: contactNameValue,
-      buidings: buildingsValue,
-      fiscalAddress: fiscalAddressValue
+    const newCustomer = {
+      "id": idValue,
+      "customerType": customerTypeValue,
+      "email": emailValue,
+      "contactName": contactNameValue,
+      "buidings": buildingsValue,
+      "fiscalAddress": fiscalAddressValue
     }
 
-    setNewCustomer(newCustomerData);
+    setNewCustomer(newCustomer);
 
   };
   

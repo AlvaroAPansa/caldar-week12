@@ -17,14 +17,14 @@ function Customers() {
     );
   }, []);
 
-  /*newCustomer ((customer) => {
+  const setNewCustomer = newCustomer => {
     setCustomers(
-      {
+      [
         ...customers,
         newCustomer
-      }
+      ]
     );
-  });*/
+  };
 
   let { path, url } = useRouteMatch();
 
@@ -35,7 +35,9 @@ function Customers() {
         <Route exact path={path}>
           <ListCustomers customers={customers} />
         </Route>
-        <Route exact path={`${path}/add`} component={AddCustomer} />
+        <Route exact path={`${path}/add`}>
+          <AddCustomer setNewCustomer={setNewCustomer} />
+        </Route>
         <Route exact path={`${path}/edit/:id`} component={EditCustomer} />
         <Route exact path={`${path}/delete/:id`} component={DeleteCustomer} />
       </Switch>
