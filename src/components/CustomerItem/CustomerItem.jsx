@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Link, useRouteMatch } from "react-router-dom";
 import styles from "./CustomerItem.module.css";
 
 function CustomerItem( {customer} ) {
-  let match = useRouteMatch();
 
   return (
     <tbody>

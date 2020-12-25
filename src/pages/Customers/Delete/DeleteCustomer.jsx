@@ -5,14 +5,11 @@ import FormButton from "../../../components/FormButton/FormButton";
 
 function DeleteCustomer() {
   return (
-    <div className={styles.container}>
-      <Header title="Customers" />
-      <div className={styles.formBox}>
-        <FormHeader type='Delete' />
-        <p>Are you sure you sure you want to delete this customer?</p>
-        <FormButton name='Cancel' />
-        <FormButton name='Confirm' />
-      </div>
+    <div className={styles.formBox}>
+      <FormHeader type='Delete' />
+      <p>Are you sure you sure you want to delete this customer?</p>
+      <FormButton name='Cancel' />
+      <FormButton name='Confirm' />
     </div>
   )
 }

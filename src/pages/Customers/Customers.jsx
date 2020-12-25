@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header";
 import ListCustomers from "./List/ListCustomers";
 import AddCustomer from "./Add/AddCustomer";
 import EditCustomer from "./Edit/EditCustomer";
+import DeleteCustomer from "./Delete/DeleteCustomer";
 
 
 function Customers() {
@@ -36,6 +37,7 @@ function Customers() {
         </Route>
         <Route exact path={`${path}/add`} component={AddCustomer} />
         <Route exact path={`${path}/edit/:id`} component={EditCustomer} />
+        <Route exact path={`${path}/delete/:id`} component={DeleteCustomer} />
       </Switch>
     </div>
   );
