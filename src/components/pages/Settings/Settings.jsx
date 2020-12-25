@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Settings.module.css";
-import Header from "../../components/Header/Header";
+import Header from "../../shared/Header/Header";
 
 function Settings() {
   return (
