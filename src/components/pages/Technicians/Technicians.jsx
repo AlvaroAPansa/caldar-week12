@@ -3,6 +3,7 @@ import styles from "./Technicians.module.css";
 import useFetch from "../../../hooks/useFetch";
 import Header from "../../shared/Header/Header";
 import Table from "../../shared/Table/Table";
+import ButtonAdd from "../../shared/CreateNewResource/CreateNewResource";
 
 import { ENDPOINT_TECHNICIANS as BASE_ENDPOINT } from "../../../constants"; // TODO cambiar el ENDPOINT_TECNHICIANS por lo que corresponda
 
@@ -64,6 +65,9 @@ function Technicians({ history }) {
       {loading && <h3>Loading ...</h3>}
       {error && <h3>ERROR: {error}</h3>}
       {myData && <Table bundleData={myData} />}
+      <ButtonAdd
+        redirect={() => history.push(`${history.location.pathname}/new`)}
+      />
     </div>
   );
 }
