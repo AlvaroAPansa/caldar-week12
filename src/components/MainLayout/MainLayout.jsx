@@ -23,10 +23,7 @@ function MainLayout() {
           <Route path="/boilers/:id" component={Boilers} />
           <Route path="/boilers" exact component={Boilers} />
 
-          <Route path="/customers" exact component={Customers} />
-          <Route path="/customers/add" exact component={AddCustomer} />
-          <Route path="/customers/edit/:id" exact component={EditCustomer} />
-          <Route path="/customers/delete/:id" exact component={DeleteCustomer} />
+          <Route path="/customers" component={Customers} />
 
           <Route path="/reports/:id" component={Reports} />
           <Route path="/reports" exact component={Reports} />

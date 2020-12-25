@@ -1,13 +1,4 @@
 /* */
-table {
-  width: 100%;
-}
 .container {
   flex: 1;
-}
-.listBox {
-  width: 90%;
-  margin: auto;
-  margin-top: 20px;
-  box-shadow: 7px 7px 5px grey;
 }

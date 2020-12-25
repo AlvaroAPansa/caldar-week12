@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Switch, useRouteMatch, Route } from "react-router-dom";
 import styles from "./Customers.module.css";
 import Header from "../../components/Header/Header";
-import ListHeader from "../../components/ListHeader/ListHeader";
-import SearchInput from "../../components/SearchInput/SearchInput";
-import ItemsList from "../../components/ItemsList/ItemsList";
-import AddButton from "../../components/AddButton/AddButton";
+import ListCustomers from "./List/ListCustomers";
+import AddCustomer from "./Add/AddCustomer";
+import EditCustomer from "./Edit/EditCustomer";
+
 
 function Customers() {
   const [customers, setCustomers] = useState([]);
@@ -24,17 +25,18 @@ function Customers() {
     );
   });*/
 
+  let { path, url } = useRouteMatch();
+
   return (
     <div className={styles.container}>
       <Header title="Customers" />
-      <div className={styles.listBox}>
-        <SearchInput />
-        <table>
-          <ListHeader />
-          <ItemsList customers={customers} />
-        </table>
-      </div>
-      <AddButton />
+      <Switch>
+        <Route exact path={path}>
+          <ListCustomers customers={customers} />
+        </Route>
+        <Route exact path={`${path}/add`} component={AddCustomer} />
+        <Route exact path={`${path}/edit/:id`} component={EditCustomer} />
+      </Switch>
     </div>
   );
 }

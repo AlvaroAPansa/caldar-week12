@@ -31,7 +31,7 @@ function CustomerItem( {customer} ) {
                 create
               </i>
             </Link>
-            <Link to={"/customers/delete/${customer.id}"} className={styles.iconContainer}>
+            <Link to={`/customers/delete/${customer.id}`} className={styles.iconContainer}>
               <i className='material-icons'>
                 delete
               </i>
