@@ -1,0 +1,34 @@
+/* */
+.container {
+
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  height: 100vh;
+  width: 300px;
+
+  background-color: var(--grey-bg);
+}
+
+.container a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.container a:hover {
+  font-weight: bold;
+}
+
+.container .active {
+  color: var(--font-color-secundary);
+}
+
+.container li {
+  margin: 1rem;
+  list-style: none;
+  text-align: center;
+}
