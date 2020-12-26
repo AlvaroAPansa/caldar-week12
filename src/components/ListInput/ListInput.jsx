@@ -1,6 +1,6 @@
 import styles from "./ListInput.module.css";
 
-function ListInput( { name } ) {
+function ListInput( { name, value } ) {
   let idName = name.toLowerCase();
   let upCharacter = name.substring(idName.indexOf(' ')+1, idName.indexOf(' ')+2)
   if (idName.indexOf(' ') !== -1) {
@@ -15,7 +15,7 @@ function ListInput( { name } ) {
         <div>
           {name}
         </div>
-        <input list='types' id={idName} name={name} className={styles.inputField} />
+        <input list='types' id={idName} name={name} className={styles.inputField} defaultValue={value} />
       </label>
       <datalist id='types'>
         <option value='Particular' />

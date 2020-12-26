@@ -38,7 +38,9 @@ function Customers() {
         <Route exact path={`${path}/add`}>
           <AddCustomer setNewCustomer={setNewCustomer} />
         </Route>
-        <Route exact path={`${path}/edit/:id`} component={EditCustomer} />
+        <Route exact path={`${path}/edit/:customerId`}>
+          <EditCustomer customers={customers} />
+        </Route>
         <Route exact path={`${path}/delete/:id`} component={DeleteCustomer} />
       </Switch>
     </div>

@@ -1,6 +1,6 @@
 import styles from "./FormInput.module.css";
 
-function FormInput( {name, type } ) {
+function FormInput( {name, type, value } ) {
   let idName = name.toLowerCase();
   let upCharacter = name.substring(idName.indexOf(' ')+1, idName.indexOf(' ')+2)
   if (idName.indexOf(' ') !== -1) {
@@ -15,7 +15,7 @@ function FormInput( {name, type } ) {
       <div>
         {name}
       </div>
-      <input type={type} id={idName} name={name} className={styles.inputField} />
+      <input type={type} id={idName} name={name} className={styles.inputField} defaultValue={value} />
     </label>
   </div>
   )
