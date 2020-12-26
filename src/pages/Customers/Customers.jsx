@@ -26,6 +26,24 @@ function Customers() {
     );
   };
 
+  const setEditedCustomer = editedCustomer => {
+    setCustomers([
+      ...customers.map(customer => {
+        if (customer.id === editedCustomer.id) {
+          customer = editedCustomer
+        }
+        return customer;
+      })
+    ]);
+
+  };
+
+  const setDeletedCustomer = id => {
+    setCustomers([
+      ...customers.filter(customer => customer.id !== id)
+    ]);
+  };
+
   let { path, url } = useRouteMatch();
 
   return (
@@ -39,9 +57,11 @@ function Customers() {
           <AddCustomer setNewCustomer={setNewCustomer} />
         </Route>
         <Route exact path={`${path}/edit/:customerId`}>
-          <EditCustomer customers={customers} />
+          <EditCustomer customers={customers} setEditedCustomer={setEditedCustomer} />
         </Route>
-        <Route exact path={`${path}/delete/:id`} component={DeleteCustomer} />
+        <Route exact path={`${path}/delete/:customerId`}>
+          <DeleteCustomer setDeletedCustomer={setDeletedCustomer} />
+        </Route>
       </Switch>
     </div>
   );

@@ -22,7 +22,7 @@ function AddCustomer( { setNewCustomer } ) {
       "id": idValue,
       "customerType": customerTypeValue,
       "email": emailValue,
-      "contactName": contactNameValue,
+      "contact": contactNameValue,
       "buidings": buildingsValue,
       "fiscalAddress": fiscalAddressValue
     }
