@@ -16,9 +16,9 @@ function Technicians({ history }) {
       headers: [
         // TODO modifacar que recurso queremos motrar en la tabla
         {
-          order: 3,
-          displayName: "Email",
-          dataName: "email",
+          order: 0,
+          displayName: "Id",
+          dataName: "id",
         },
         {
           order: 2,
@@ -30,6 +30,16 @@ function Technicians({ history }) {
           displayName: "First Name",
           dataName: "first_name",
         },
+        {
+          order: 3,
+          displayName: "Email",
+          dataName: "email",
+        },
+        {
+          order: 4,
+          displayName: "Expertise",
+          dataName: "expertise",
+        },
       ],
       data,
       actions: [
@@ -37,6 +47,7 @@ function Technicians({ history }) {
         {
           fn: (id) => history.push(`${history.location.pathname}/${id}`),
           displayName: "✏", // Edita el recurso
+          hint: "Edit technician",
         },
         {
           fn: (id) =>
@@ -53,20 +64,35 @@ function Technicians({ history }) {
               }));
             }),
           displayName: "❌", // Borra el recurso
+          hint: "Delete technician",
         },
       ],
     });
   }, [data]);
 
+  function handleOnSearch(e) {
+    const text = e.target.value.toLowerCase();
+    console.log(text)
+    setMyData((pS) => ({
+      ...pS,
+      data: data.filter(
+        (d) =>
+          d["first_name"].toLowerCase().includes(text) ||
+          d["last_name"].toLowerCase().includes(text) ||
+          d["email"].toLowerCase().includes(text)
+      ),
+    }));
+  }
+
   return (
     <div className={styles.container}>
       <Header title="Technicians" />
-      <div>Technicians content</div>
       {loading && <h3>Loading ...</h3>}
       {error && <h3>ERROR: {error}</h3>}
-      {myData && <Table bundleData={myData} />}
+      {myData && <Table bundleData={myData} handleOnSearch={handleOnSearch} />}
       <ButtonAdd
         redirect={() => history.push(`${history.location.pathname}/new`)}
+        title="Create new technician"
       />
     </div>
   );

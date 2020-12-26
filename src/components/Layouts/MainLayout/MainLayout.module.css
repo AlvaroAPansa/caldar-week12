@@ -1,3 +1,11 @@
 .webContainer {
   display: flex;
 }
+
+.navbar {
+  width: 300px;
+}
+
+.content {
+  flex: 1;
+}

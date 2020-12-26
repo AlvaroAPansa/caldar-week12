@@ -48,7 +48,6 @@ function TechnicianDetail({ match, history }) {
 
   React.useEffect(() => {
     if (!data || error) return;
-    console.log("ACAA", data);
     setFormData(refactorData(data));
   }, [data]);
 
@@ -82,7 +81,6 @@ function TechnicianDetail({ match, history }) {
       },
       body: JSON.stringify(newTech),
     }).then((r) => {
-      console.log("r", r);
       if (!r.ok) {
         alert("No se ha podido actualizar el tecnico!");
         return;

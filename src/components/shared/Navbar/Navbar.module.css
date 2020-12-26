@@ -1,29 +1,34 @@
 /* */
 .container {
+
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
+  position: fixed;
+  height: 100vh;
+  width: 300px;
 
-  min-width: 300px;
   background-color: var(--grey-bg);
 }
 
-a {
+.container a {
   color: var(--white);
   text-decoration: none;
 }
 
-a:hover {
+.container a:hover {
   font-weight: bold;
 }
 
-.active {
+.container .active {
   color: var(--font-color-secundary);
 }
 
-li {
+.container li {
+  margin: 1rem;
   list-style: none;
   text-align: center;
 }

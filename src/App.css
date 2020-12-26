@@ -8,7 +8,10 @@
 :root {
   --grey-bg: rgb(35, 47, 62);
   --orange-bg: rgb(252, 98, 37);
+  --orange-bg-alf: rgba(252, 98, 37,0.3);
   --white: rgb(250, 250, 250);
+  --grey: rgb(197, 197, 197);
   --font-color-primary: rgb(35, 47, 62);
   --font-color-secundary: rgb(252, 98, 37);
+  --box-shadow-3dp: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.20);
 }

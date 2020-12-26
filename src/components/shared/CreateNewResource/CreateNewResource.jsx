@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./CreateNewResource.module.css";
 
-function CreateNewResource({ redirect }) {
+function CreateNewResource({ redirect, title }) {
   return (
-    <button className="addNewRes" onClick={redirect}>
-      +
+    <button className={styles.addNewRes} onClick={redirect} title={title}>
+      <span>+</span>
     </button>
   );
 }

@@ -17,31 +17,35 @@ import { Switch, Route, Redirect } from "react-router-dom";
 function MainLayout() {
   return (
     <div className={styles.webContainer}>
-      <Navbar />
-      <Switch>
-        <Route path="/boilers/:id" component={Boilers} />
-        <Route path="/boilers" exact component={Boilers} />
+      <div className={styles.navbar}>
+        <Navbar />
+      </div>
+      <div className={styles.content}>
+        <Switch>
+          <Route path="/boilers/:id" component={Boilers} />
+          <Route path="/boilers" exact component={Boilers} />
 
-        <Route path="/customers/:id" component={Customers} />
-        <Route path="/customers" exact component={Customers} />
+          <Route path="/customers/:id" component={Customers} />
+          <Route path="/customers" exact component={Customers} />
 
-        <Route path="/reports/:id" component={Reports} />
-        <Route path="/reports" exact component={Reports} />
+          <Route path="/reports/:id" component={Reports} />
+          <Route path="/reports" exact component={Reports} />
 
-        <Route path="/schedule/:id" component={Schedule} />
-        <Route path="/schedule" exact component={Schedule} />
+          <Route path="/schedule/:id" component={Schedule} />
+          <Route path="/schedule" exact component={Schedule} />
 
-        <Route path="/settings/:id" component={Settings} />
-        <Route path="/settings" exact component={Settings} />
+          <Route path="/settings/:id" component={Settings} />
+          <Route path="/settings" exact component={Settings} />
 
-        <Route path="/technicians/:id" component={TechnicianDetail} />
-        <Route path="/technicians" exact component={Technicians} />
+          <Route path="/technicians/:id" component={TechnicianDetail} />
+          <Route path="/technicians" exact component={Technicians} />
 
-        <Route path="/" exact component={Home} />
-        <Route path="/">
-          <Redirect to="/" />
-        </Route>
-      </Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }
