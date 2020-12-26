@@ -95,12 +95,28 @@ function TechnicianDetail({ match, history }) {
 
   return (
     <div className={styles.container}>
-      <Header title="TechnicianDetail" />
-      <div>TechnicianDetail content</div>
+      <Header
+        title={
+          ["new", "add", "+"].includes(match.params.id.toLowerCase())
+            ? "Create new technician"
+            : "Edit technician"
+        }
+      />
       {loading && <h3>Loading ...</h3>}
       {error && <h3>ERROR {error && error.message}</h3>}
-      <>
+      <div className={styles.card}>
         <form onSubmit={handleOnSubmit}>
+          <label>
+            <span>Id</span>
+            <br />
+            <input
+              disabled
+              type="text"
+              value={formData.id}
+              name="id"
+              onChange={handleOnChange}
+            />
+          </label>
           <label>
             <span>First Name</span>
             <br />
@@ -121,17 +137,7 @@ function TechnicianDetail({ match, history }) {
               onChange={handleOnChange}
             />
           </label>
-          <label>
-            <span>Id</span>
-            <br />
-            <input
-              disabled
-              type="text"
-              value={formData.id}
-              name="id"
-              onChange={handleOnChange}
-            />
-          </label>
+
           <label>
             <span>Address</span>
             <br />
@@ -162,7 +168,7 @@ function TechnicianDetail({ match, history }) {
               onChange={handleOnChange}
             />
           </label>
-          <div className="checkboxes">
+          <div className={styles.checkboxes}>
             <span>Expertise</span>
             <br />
             <input
@@ -205,10 +211,16 @@ function TechnicianDetail({ match, history }) {
             />
             <label htmlFor="D">D</label>
           </div>
-          <input type="button" value="Back" onClick={() => history.goBack()} />
-          <input type="submit" value="Confirm" />
+          <div className={styles.buttons}>
+            <input
+              type="button"
+              value="Back"
+              onClick={() => history.goBack()}
+            />
+            <input type="submit" value="Confirm" />
+          </div>
         </form>
-      </>
+      </div>
     </div>
   );
 }

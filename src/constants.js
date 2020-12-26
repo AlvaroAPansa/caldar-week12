@@ -1,4 +1,3 @@
-// export const BACKEND_URL = "http://localhost:3010";
 export const BACKEND_URL = "https://rr-caldar.herokuapp.com";
 export const ENDPOINT_APPOINTMENTS = `${BACKEND_URL}/appointments`;
 export const ENDPOINT_BOILERS = `${BACKEND_URL}/boilers`;

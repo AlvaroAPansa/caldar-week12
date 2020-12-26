@@ -72,7 +72,6 @@ function Technicians({ history }) {
 
   function handleOnSearch(e) {
     const text = e.target.value.toLowerCase();
-    console.log(text)
     setMyData((pS) => ({
       ...pS,
       data: data.filter(

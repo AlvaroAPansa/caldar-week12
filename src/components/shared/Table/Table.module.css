@@ -1,12 +1,11 @@
 /* */
 .card {
   /* width: 600px; */
-  margin: 2rem auto 2rem auto;
+  margin: 2rem;
 
   border: 1px solid var(--grey);
   border-radius: 8px;
   box-shadow: var(--box-shadow-3dp);
-  margin: 2rem;
   padding: 2rem;
 }
 
