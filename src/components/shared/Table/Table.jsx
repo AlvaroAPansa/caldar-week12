@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Table.module.css";
 
-function Table({ bundleData: { headers, data, actions }, handleOnSearch }) {
+function Table({ headers, data, actions, handleOnSearch }) {
   return (
     <div className={styles.card}>
       <div className={styles.searchContainer}>
