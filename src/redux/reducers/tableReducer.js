@@ -12,8 +12,6 @@ const initialState = {
   loading: false,
   error: null,
   rawData: null,
-  header: [],
-  commonActions: [],
   data: null,
 };
 
@@ -67,6 +65,7 @@ export default function tableReducer(state = initialState, action) {
         ...state,
         loading: false,
         rawData: state.rawData.filter((d) => d.id !== action.payload.id),
+        data: state.data.filter((d) => d.id !== action.payload.id),
       };
 
     case DELETE_RESOURCE_FAILURE:

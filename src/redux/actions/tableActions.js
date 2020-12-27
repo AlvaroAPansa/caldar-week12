@@ -10,11 +10,14 @@ import {
 
 let url = "";
 
-export function fetchResourceList({ baseUrl, headers, actions }) {
+export function fetchResourceList(baseUrl) {
   return async (dispatch) => {
-    if (!baseUrl) return;
+    if (!baseUrl) return dispatch(fetchResourceFailure("Error: Invalid URL"));
+
     url = baseUrl;
-    dispatch(fetchResourceBegin(headers, actions));
+
+    dispatch(fetchResourceBegin());
+
     try {
       const response = await fetch(url);
       const json = await response.json();
@@ -27,9 +30,8 @@ export function fetchResourceList({ baseUrl, headers, actions }) {
   };
 }
 
-const fetchResourceBegin = (headers, actions) => ({
+const fetchResourceBegin = () => ({
   type: FETCH_RESOURCE_BEGIN,
-  payload: { headers, actions },
 });
 
 const fetchResourceSuccess = (resources) => ({
@@ -54,22 +56,13 @@ export function deleteResource(id) {
     dispatch(deleteResourceBegin());
     fetch(`${url}/${id}`, {
       method: "DELETE",
-    }).then((r) => {
-      return dispatch(deleteResourceError("PUTO"));
-      if (!r.ok) {
-        alert("No se ha podido borrar el usuario.");
-        return;
-      }
-      // setMyData((d) => ({
-      //   ...d,
-      //   data: d.data.filter((q) => q.id !== id),
-      // }));
-
-      return {
-        type: FILTER_RESOURCE,
-        payload: { id },
-      };
-    });
+    })
+      .then((r) => {
+        return r.ok
+          ? dispatch(deleteResourceSuccess(id))
+          : dispatch(deleteResourceError("No se ha podido borrar el usuario."));
+      })
+      .catch((error) => dispatch(deleteResourceError(error)));
   };
 }
 
