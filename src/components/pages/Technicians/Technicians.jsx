@@ -1,94 +1,85 @@
 import React from "react";
 import styles from "./Technicians.module.css";
-import useFetch from "../../../hooks/useFetch";
 import Header from "../../shared/Header/Header";
 import Table from "../../shared/Table/Table";
 import ButtonAdd from "../../shared/CreateNewResource/CreateNewResource";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchResourceList,
+  filterData,
+  deleteResource,
+} from "../../../redux/actions/tableActions";
 
-import { ENDPOINT_TECHNICIANS as BASE_ENDPOINT } from "../../../constants"; // TODO cambiar el ENDPOINT_TECNHICIANS por lo que corresponda
+// TODO cambiar el ENDPOINT_TECNHICIANS por lo que corresponda
+import { ENDPOINT_TECHNICIANS as BASE_ENDPOINT } from "../../../constants";
 
 function Technicians({ history }) {
-  const { data, loading, error } = useFetch(BASE_ENDPOINT);
-  const [myData, setMyData] = React.useState();
+  const { data, loading, error } = useSelector((s) => s.Table_Selector);
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
-    if (!data) return;
-    setMyData({
-      headers: [
-        // TODO modifacar que recurso queremos motrar en la tabla
-        {
-          order: 0,
-          displayName: "Id",
-          dataName: "id",
-        },
-        {
-          order: 2,
-          displayName: "Last Name",
-          dataName: "last_name",
-        },
-        {
-          order: 1,
-          displayName: "First Name",
-          dataName: "first_name",
-        },
-        {
-          order: 3,
-          displayName: "Email",
-          dataName: "email",
-        },
-        {
-          order: 4,
-          displayName: "Expertise",
-          dataName: "expertise",
-        },
-      ],
-      data,
-      actions: [
-        // TODO que acciones tiene que hacer cada fila (creería que no hay que tocarlo)
-        {
-          fn: (id) => history.push(`${history.location.pathname}/${id}`),
-          displayName: "✏", // Edita el recurso
-          hint: "Edit technician",
-        },
-        {
-          fn: (id) =>
-            fetch(`${BASE_ENDPOINT}/${id}`, {
-              method: "DELETE",
-            }).then((r) => {
-              if (!r.ok) {
-                alert("No se ha podido borrar el usuario.");
-                return;
-              }
-              setMyData((d) => ({
-                ...d,
-                data: d.data.filter((q) => q.id !== id),
-              }));
-            }),
-          displayName: "❌", // Borra el recurso
-          hint: "Delete technician",
-        },
-      ],
-    });
-  }, [data]);
+    dispatch(fetchResourceList(BASE_ENDPOINT));
+  }, []);
 
   function handleOnSearch(e) {
     const text = e.target.value.toLowerCase();
-    setMyData((pS) => ({
-      ...pS,
-      data: data.filter(
-        (d) =>
-          d["first_name"].toLowerCase().includes(text) ||
-          d["last_name"].toLowerCase().includes(text) ||
-          d["email"].toLowerCase().includes(text)
-      ),
-    }));
+    // Filtra según los dataName definidos en headers
+    // Ej, se filatraría buscando en 3 columnas
+    dispatch(filterData(text, "first_name", "last_name", "email"));
   }
 
   return (
     <div className={styles.container}>
       <Header title="Technicians" />
       {loading && <h3>Loading ...</h3>}
-      {error && <h3>ERROR: {error}</h3>}
-      {myData && <Table bundleData={myData} handleOnSearch={handleOnSearch} />}
+      {error && <h3>{error}</h3>}
+      {data && (
+        <Table
+          handleOnSearch={handleOnSearch}
+          data={data}
+          headers={[
+            // TODO Estas son las columnas que mostraría la tabla, el dataName corresponde al valor del objecto devuelto por mongo ej, {id:12, last_name:"askljd"}
+            {
+              order: 0,
+              displayName: "Id",
+              dataName: "id",
+            },
+            {
+              order: 2,
+              displayName: "Last Name",
+              dataName: "last_name",
+            },
+            {
+              order: 1,
+              displayName: "First Name",
+              dataName: "first_name",
+            },
+            {
+              order: 3,
+              displayName: "Email",
+              dataName: "email",
+            },
+            {
+              order: 4,
+              displayName: "Expertise",
+              dataName: "expertise",
+            },
+          ]}
+          actions={[
+            // Acciones que hacer cada fila (creería que no hay que tocarlo)
+            {
+              fn: (id) => history.push(`${history.location.pathname}/${id}`),
+              displayName: "✏", // Edita el recurso
+              hint: "Edit technician",
+            },
+            {
+              fn: (id) => dispatch(deleteResource(id)),
+              displayName: "❌", // Borra el recurso
+              hint: "Delete technician",
+            },
+          ]}
+        />
+      )}
       <ButtonAdd
         redirect={() => history.push(`${history.location.pathname}/new`)}
         title="Create new technician"
