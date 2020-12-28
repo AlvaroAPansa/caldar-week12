@@ -7,6 +7,7 @@ import Boilers from "../../pages/Boilers/Boilers";
 import Customers from "../../pages/Customers/Customers";
 import Reports from "../../pages/Reports/Reports";
 import Schedule from "../../pages/Schedule/Schedule";
+import ScheduleDetail from "../../pages/ScheduleDetail/ScheduleDetail";
 import Settings from "../../pages/Settings/Settings";
 import Technicians from "../../pages/Technicians/Technicians";
 import TechnicianDetail from "../../pages/TechnicianDetail/TechnicianDetail";
@@ -31,7 +32,7 @@ function MainLayout() {
           <Route path="/reports/:id" component={Reports} />
           <Route path="/reports" exact component={Reports} />
 
-          <Route path="/schedule/:id" component={Schedule} />
+          <Route path="/schedule/:id" component={ScheduleDetail} />
           <Route path="/schedule" exact component={Schedule} />
 
           <Route path="/settings/:id" component={Settings} />
