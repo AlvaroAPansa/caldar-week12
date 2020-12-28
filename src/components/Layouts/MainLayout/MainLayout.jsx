@@ -4,6 +4,7 @@ import styles from "./MainLayout.module.css";
 import Navbar from "../../shared/Navbar/Navbar";
 
 import Boilers from "../../pages/Boilers/Boilers";
+import BoilerDetail from "../../pages/BoilerDetail/BoilerDetail"
 import Customers from "../../pages/Customers/Customers";
 import Reports from "../../pages/Reports/Reports";
 import Schedule from "../../pages/Schedule/Schedule";
@@ -22,7 +23,7 @@ function MainLayout() {
       </div>
       <div className={styles.content}>
         <Switch>
-          <Route path="/boilers/:id" component={Boilers} />
+          <Route path="/boilers/:id" component={BoilerDetail} />
           <Route path="/boilers" exact component={Boilers} />
 
           <Route path="/customers/:id" component={Customers} />
