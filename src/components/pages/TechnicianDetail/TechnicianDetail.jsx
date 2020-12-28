@@ -7,6 +7,7 @@ import Header from "../../shared/Header/Header";
 import {
   fetchResourceList,
   handleModifyFormData,
+  handleSubmit,
 } from "../../../redux/actions/technicianActions";
 
 function TechnicianDetail({ match, history }) {
@@ -16,13 +17,17 @@ function TechnicianDetail({ match, history }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
-      fetchResourceList(
-        "new" === match.params.id.toLowerCase()
-          ? null
-          : `${BASE_ENDPOINT}/${match.params.id}`
-      )
+      fetchResourceList({
+        isNew: match.url.endsWith("new"),
+        url: {
+          GET: `${BASE_ENDPOINT}/${match.params.id}`,
+          PUT_POST: match.url.endsWith("new")
+            ? `${BASE_ENDPOINT}`
+            : `${BASE_ENDPOINT}/${match.params.id}`,
+        },
+      })
     );
-  }, []);
+  }, [history]);
 
   function handleOnChange(e) {
     dispatch(handleModifyFormData(e));
@@ -30,32 +35,33 @@ function TechnicianDetail({ match, history }) {
 
   function handleOnSubmit(e) {
     e.preventDefault();
+    dispatch(handleSubmit(formData, history, match));
 
-    const newTech = { ...formData };
-    const expertise = [];
-    if (newTech.expertise.A) expertise.push("A");
-    if (newTech.expertise.B) expertise.push("B");
-    if (newTech.expertise.C) expertise.push("C");
-    if (newTech.expertise.D) expertise.push("D");
-    newTech.expertise = expertise;
+    // const newTech = { ...formData };
+    // const expertise = [];
+    // if (newTech.expertise.A) expertise.push("A");
+    // if (newTech.expertise.B) expertise.push("B");
+    // if (newTech.expertise.C) expertise.push("C");
+    // if (newTech.expertise.D) expertise.push("D");
+    // newTech.expertise = expertise;
 
-    fetch(`${BASE_ENDPOINT}/${newTech.id ? newTech.id : ""}`, {
-      method: newTech.id ? "PUT" : "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTech),
-    }).then((r) => {
-      if (!r.ok) {
-        alert("No se ha podido actualizar el tecnico!");
-        return;
-      }
-      if (!newTech.id) {
-        r.json().then((_data) => {
-          history.push(`${match.path.replace(":id", _data.id)}`);
-        });
-      }
-    });
+    // fetch(`${BASE_ENDPOINT}/${newTech.id ? newTech.id : ""}`, {
+    //   method: newTech.id ? "PUT" : "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(newTech),
+    // }).then((r) => {
+    //   if (!r.ok) {
+    //     alert("No se ha podido actualizar el tecnico!");
+    //     return;
+    //   }
+    //   if (!newTech.id) {
+    //     r.json().then((_data) => {
+    //       history.push(`${match.path.replace(":id", _data.id)}`);
+    //     });
+    //   }
+    // });
   }
 
   return (
@@ -68,7 +74,7 @@ function TechnicianDetail({ match, history }) {
         }
       />
       {loading && <h3>Loading ...</h3>}
-      {error && <h3>ERROR {error && error.message}</h3>}
+      {error && <h3>ERROR {error}</h3>}
       <div className={styles.card}>
         <form onSubmit={handleOnSubmit}>
           <label>

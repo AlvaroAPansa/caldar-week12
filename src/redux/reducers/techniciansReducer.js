@@ -3,12 +3,14 @@ import {
   FETCH_RESOURCE_SUCCESS,
   FETCH_RESOURCE_FAILURE,
   FORM_UPDATE_FIELD,
+  FORM_SUBMIT_BEGIN,
+  FORM_SUBMIT_SUCCESS,
+  FORM_SUBMIT_FAILURE,
 } from "../types/technicians";
 
 const initialState = {
   loading: false,
   error: null,
-  data: null,
   formData: {
     // TODO estos son los nombres que tiene nuestros inputs
     id: "",
@@ -43,16 +45,6 @@ function refactorData(data) {
   };
 }
 
-const a = (prevState, event) => {
-  const nState = { ...prevState };
-  if (event.target.type === "checkbox") {
-    nState.expertise[event.target.name] = event.target.checked;
-  } else {
-    nState[event.target.name] = event.target.value;
-  }
-  return nState;
-};
-
 export default function techiciansReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_RESOURCE_BEGIN:
@@ -60,7 +52,6 @@ export default function techiciansReducer(state = initialState, action) {
         ...initialState,
         loading: true,
         error: null,
-        data: null,
       };
 
     case FETCH_RESOURCE_SUCCESS:
@@ -75,7 +66,6 @@ export default function techiciansReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload.error,
-        data: null,
       };
 
     case FORM_UPDATE_FIELD:
@@ -87,6 +77,26 @@ export default function techiciansReducer(state = initialState, action) {
         nState.formData[input.name] = input.value;
       }
       return nState;
+
+    case FORM_SUBMIT_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+
+    case FORM_SUBMIT_SUCCESS:
+      const nState1 = { ...state, loading: false };
+      if (!action.payload.newId) return nState1;
+      nState1.formData.id = action.payload.newId;
+      return nState1;
+
+    case FORM_SUBMIT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
 
     default:
       return state;
