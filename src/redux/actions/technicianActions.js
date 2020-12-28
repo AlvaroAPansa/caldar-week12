@@ -25,7 +25,7 @@ export function fetchResourceList({ isNew, url }) {
       const json = await response.json();
       response.ok
         ? dispatch(fetchResourceSuccess(json))
-        : dispatch(fetchResourceFailure(json));
+        : dispatch(fetchResourceFailure(json.message));
     } catch (error) {
       dispatch(fetchResourceFailure(error.message));
     }
