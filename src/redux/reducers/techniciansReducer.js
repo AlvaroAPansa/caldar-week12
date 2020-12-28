@@ -12,7 +12,7 @@ const initialState = {
   loading: false,
   error: null,
   formData: {
-    // TODO estos son los nombres que tiene nuestros inputs
+    // TODO estos son los nombres que tiene nuestros inputs del form
     id: "",
     first_name: "",
     last_name: "",
@@ -29,6 +29,11 @@ const initialState = {
 };
 
 function refactorData(data) {
+  /* 
+  TODO expertise me viene en un array y yo lo muestro como checkboxes.
+  por eso cuando le pegue al servidor y me devuelve el dato, lo que hago es
+  "convertirlo" tal cual lo uso en el form.
+  */
   return {
     id: data.id,
     first_name: data.first_name,
@@ -71,6 +76,7 @@ export default function techiciansReducer(state = initialState, action) {
     case FORM_UPDATE_FIELD:
       const input = action.payload.event.target;
       const nState = { ...state };
+      // TODO como tengo checkboxes no toda la data entra de una en mi formData
       if (input.type === "checkbox") {
         nState.formData.expertise[input.name] = input.checked;
       } else {

@@ -8,7 +8,7 @@ import {
   fetchResourceList,
   handleModifyFormData,
   handleSubmit,
-} from "../../../redux/actions/technicianActions";
+} from "../../../redux/actions/technicianActions"; // TODO las acciones de su recurso
 
 function TechnicianDetail({ match, history }) {
   const { loading, error, formData } = useSelector(
@@ -36,46 +36,21 @@ function TechnicianDetail({ match, history }) {
   function handleOnSubmit(e) {
     e.preventDefault();
     dispatch(handleSubmit(formData, history, match));
-
-    // const newTech = { ...formData };
-    // const expertise = [];
-    // if (newTech.expertise.A) expertise.push("A");
-    // if (newTech.expertise.B) expertise.push("B");
-    // if (newTech.expertise.C) expertise.push("C");
-    // if (newTech.expertise.D) expertise.push("D");
-    // newTech.expertise = expertise;
-
-    // fetch(`${BASE_ENDPOINT}/${newTech.id ? newTech.id : ""}`, {
-    //   method: newTech.id ? "PUT" : "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(newTech),
-    // }).then((r) => {
-    //   if (!r.ok) {
-    //     alert("No se ha podido actualizar el tecnico!");
-    //     return;
-    //   }
-    //   if (!newTech.id) {
-    //     r.json().then((_data) => {
-    //       history.push(`${match.path.replace(":id", _data.id)}`);
-    //     });
-    //   }
-    // });
   }
 
   return (
     <div className={styles.container}>
       <Header
         title={
-          ["new", "add", "+"].includes(match.params.id.toLowerCase())
+          match.url.endsWith("new")
             ? "Create new technician"
             : "Edit technician"
         }
       />
       {loading && <h3>Loading ...</h3>}
-      {error && <h3>ERROR {error}</h3>}
+      {error && <h3>{error}</h3>}
       <div className={styles.card}>
+        {/* TODO los que correspondan... */}
         <form onSubmit={handleOnSubmit}>
           <label>
             <span>Id</span>

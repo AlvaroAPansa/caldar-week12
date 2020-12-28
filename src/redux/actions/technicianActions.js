@@ -90,9 +90,7 @@ export function handleSubmit(formData, history, match) {
           r.json().then((_data) => {
             newId = _data.id;
             dispatch(formSubmitSuccess(newId));
-            // setTimeout(() =>
             return history.push(`${match.path.replace(":id", newId)}`);
-            // );
           });
         }
         dispatch(formSubmitSuccess());
