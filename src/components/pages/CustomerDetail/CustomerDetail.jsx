@@ -129,6 +129,14 @@ function CustomerDetail( {match, history} ) {
               onChange={handleOnChange}
             />
           </label>
+          <div className={styles.buttons}>
+            <input
+              type="button"
+              value="Back"
+              onClick={() => history.goBack()}
+            />
+            <input type="submit" value="Confirm" />
+          </div>
         </form>
       </div>
     </div>
