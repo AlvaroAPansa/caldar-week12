@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Customers.module.css";
 import Header from "../../shared/Header/Header";
 import Table from "../../shared/Table/Table";
+import ButtonAdd from "../../shared/CreateNewResource/CreateNewResource";
 import {useSelector, useDispatch} from "react-redux";
 import {fetchResourceList, filterData, deleteResource} from "../../../redux/actions/tableActions"
 import {ENDPOINT_CUSTOMERS as BASE_ENDPOINT} from "../../../constants";
@@ -74,6 +75,10 @@ function Customers({history}) {
           ]}
         />
       )}
+      <ButtonAdd 
+        redirect={() => history.push(`${history.location.pathname}/new`)}
+        title="Create new customer"
+      />
     </div>
   );
 }
