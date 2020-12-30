@@ -6,7 +6,7 @@ import {ENDPOINT_CUSTOMERS as BASE_ENDPOINT} from "../../../constants";
 import {fetchResourceList, handleModifyFormData, handleSubmit} from "../../../redux/actions/customerActions";
 
 function CustomerDetail( {match, history} ) {
-  const { loading, error, formData} = useSelector(
+  const {loading, error, formData} = useSelector(
     (s) => s.Customers_Selector
   );
 
@@ -52,7 +52,7 @@ function CustomerDetail( {match, history} ) {
             <span>ID</span>
             <br/>
             <input 
-              disabled
+              //disabled
               type="text"
               value={formData.id}
               name="id"
