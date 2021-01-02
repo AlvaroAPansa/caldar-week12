@@ -6,6 +6,7 @@ import Navbar from "../../shared/Navbar/Navbar";
 import Boilers from "../../pages/Boilers/Boilers";
 import BoilerDetail from "../../pages/BoilerDetail/BoilerDetail";
 import Customers from "../../pages/Customers/Customers";
+import CustomerDetail from "../../pages/CustomerDetail/CustomerDetail";
 import Reports from "../../pages/Reports/Reports";
 import Schedule from "../../pages/Schedule/Schedule";
 import ScheduleDetail from "../../pages/ScheduleDetail/ScheduleDetail";
@@ -27,7 +28,7 @@ function MainLayout() {
           <Route path="/boilers/:id" component={BoilerDetail} />
           <Route path="/boilers" exact component={Boilers} />
 
-          <Route path="/customers/:id" component={Customers} />
+          <Route path="/customers/:id" component={CustomerDetail} />
           <Route path="/customers" exact component={Customers} />
 
           <Route path="/reports/:id" component={Reports} />
