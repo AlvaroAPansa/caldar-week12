@@ -35,7 +35,7 @@ function CustomerDetail( {match, history} ) {
 
     const parsedId = parseInt(formData.id);
     let buildingsArray;
-    
+      
     if ((typeof formData.buildings) === "string") {
       if (formData.buildings.length === 0) {
         buildingsArray = new Array();
