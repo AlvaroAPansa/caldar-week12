@@ -1,0 +1,22 @@
+/* */
+.card {
+
+  border: 1px solid var(--grey);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-3dp);
+  background-color: var(--white);
+
+
+}
+
+.header {
+  background-color: var(--orange-bg);
+  color: var(--white);
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px 8px 0 0;
+}
+
+.body {
+  margin: 1rem;
+}

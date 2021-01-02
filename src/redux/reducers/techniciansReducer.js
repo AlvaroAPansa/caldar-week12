@@ -19,12 +19,6 @@ const initialState = {
     address: "",
     phone: "",
     expertise: [],
-    // expertise: {
-    //   A: false,
-    //   B: false,
-    //   C: false,
-    //   D: false,
-    // },
   },
 };
 
@@ -60,7 +54,6 @@ export default function techiciansReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        // formData: refactorData(action.payload.resources),
         formData: refactorData(action.payload.resources),
       };
 
@@ -84,10 +77,6 @@ export default function techiciansReducer(state = initialState, action) {
         loading: false,
         formData: refactorData(action.payload),
       };
-    // const nState1 = { ...state, loading: false };
-    // if (!action.payload.newId) return nState1;
-    // nState1.formData = action.payload;
-    // return nState1;
 
     case FORM_SUBMIT_FAILURE:
       return {

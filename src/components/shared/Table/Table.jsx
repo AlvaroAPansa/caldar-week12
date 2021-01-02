@@ -40,7 +40,7 @@ function Table({ headers, data, actions, handleOnSearch }) {
                   {actions.map((a) => (
                     <button
                       key={item.id + a.displayName}
-                      onClick={() => a.fn(item.id)}
+                      onClick={() => a.fn(item)}
                       title={a.hint}
                     >
                       {a.displayName}

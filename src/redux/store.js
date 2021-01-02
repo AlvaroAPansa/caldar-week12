@@ -4,12 +4,14 @@ import thunk from "redux-thunk";
 
 import TableR from "./reducers/tableReducer";
 import TechniciansR from "./reducers/techniciansReducer";
+import ModalR from "./reducers/modalReducer";
 
 export default createStore(
   combineReducers({
     // List of Reducers
     Table_Selector: TableR,
     Technicians_Selector: TechniciansR,
+    Modal_Selector: ModalR,
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

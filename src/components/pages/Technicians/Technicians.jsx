@@ -9,6 +9,9 @@ import {
   filterData,
   deleteResource,
 } from "../../../redux/actions/tableActions";
+import { closeModal, openModal } from "../../../redux/actions/modalActions";
+
+import YesNoMessage from "../../shared/YesNoMessage/YesNoMessage";
 
 // TODO cambiar el ENDPOINT_TECNHICIANS por lo que corresponda
 import { ENDPOINT_TECHNICIANS as BASE_ENDPOINT } from "../../../constants";
@@ -68,12 +71,26 @@ function Technicians({ history }) {
           actions={[
             // Acciones que hacer cada fila (creería que no hay que tocarlo)
             {
-              fn: (id) => history.push(`${history.location.pathname}/${id}`),
+              fn: (item) =>
+                history.push(`${history.location.pathname}/${item.id}`),
               displayName: "✏", // Edita el recurso
               hint: "Edit technician",
             },
             {
-              fn: (id) => dispatch(deleteResource(id)),
+              fn: (item) =>
+                dispatch(
+                  openModal(
+                    <YesNoMessage
+                      title="Delete Technician"
+                      message={`Are you sure you want to delete the technician ${item.first_name}`}
+                      onYes={() => {
+                        dispatch(deleteResource(item.id));
+                        dispatch(closeModal());
+                      }}
+                      onNo={() => dispatch(closeModal())}
+                    />
+                  )
+                ),
               displayName: "❌", // Borra el recurso
               hint: "Delete technician",
             },
