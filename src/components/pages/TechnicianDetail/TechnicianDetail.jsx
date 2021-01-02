@@ -1,110 +1,56 @@
 import { ENDPOINT_TECHNICIANS as BASE_ENDPOINT } from "../../../constants"; // TODO usar el que corresponda
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./TechnicianDetail.module.css";
 import Header from "../../shared/Header/Header";
 
-// Custom hooks
-import useFetch from "../../../hooks/useFetch";
-
-function refactorData(data) {
-  return {
-    id: data.id,
-    first_name: data.first_name,
-    last_name: data.last_name,
-    email: data.email,
-    address: data.address,
-    phone: data.phone,
-    expertise: {
-      A: data.expertise.includes("A"),
-      B: data.expertise.includes("B"),
-      C: data.expertise.includes("C"),
-      D: data.expertise.includes("D"),
-    },
-  };
-}
+import {
+  fetchResourceList,
+  handleModifyFormData,
+  handleSubmit,
+} from "../../../redux/actions/technicianActions"; // TODO las acciones de su recurso
 
 function TechnicianDetail({ match, history }) {
-  const [formData, setFormData] = React.useState({
-    // TODO estos son los nombres que tiene nuestros inputs
-    id: "",
-    first_name: "",
-    last_name: "",
-    email: "",
-    address: "",
-    phone: "",
-    expertise: {
-      A: false,
-      B: false,
-      C: false,
-      D: false,
-    },
-  });
-
-  const { data, loading, error } = useFetch(
-    ["new", "add", "+"].includes(match.params.id.toLowerCase())
-      ? null
-      : `${BASE_ENDPOINT}/${match.params.id}`
+  const { loading, error, formData } = useSelector(
+    (s) => s.Technicians_Selector
   );
-
-  React.useEffect(() => {
-    if (!data || error) return;
-    setFormData(refactorData(data));
-  }, [data]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      fetchResourceList({
+        isNew: match.url.endsWith("new"),
+        url: {
+          GET: `${BASE_ENDPOINT}/${match.params.id}`,
+          PUT_POST: match.url.endsWith("new")
+            ? `${BASE_ENDPOINT}`
+            : `${BASE_ENDPOINT}/${match.params.id}`,
+        },
+      })
+    );
+  }, [history]);
 
   function handleOnChange(e) {
-    return setFormData((pState) => {
-      const nState = { ...pState };
-      if (e.target.type === "checkbox") {
-        nState.expertise[e.target.name] = e.target.checked;
-      } else {
-        nState[e.target.name] = e.target.value;
-      }
-      return nState;
-    });
+    dispatch(handleModifyFormData(e));
   }
 
   function handleOnSubmit(e) {
     e.preventDefault();
-
-    const newTech = { ...formData };
-    const expertise = [];
-    if (newTech.expertise.A) expertise.push("A");
-    if (newTech.expertise.B) expertise.push("B");
-    if (newTech.expertise.C) expertise.push("C");
-    if (newTech.expertise.D) expertise.push("D");
-    newTech.expertise = expertise;
-
-    fetch(`${BASE_ENDPOINT}/${newTech.id ? newTech.id : ""}`, {
-      method: newTech.id ? "PUT" : "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTech),
-    }).then((r) => {
-      if (!r.ok) {
-        alert("No se ha podido actualizar el tecnico!");
-        return;
-      }
-      if (!newTech.id) {
-        r.json().then((_data) => {
-          history.push(`${match.path.replace(":id", _data.id)}`);
-        });
-      }
-    });
+    dispatch(handleSubmit(formData, history, match));
   }
 
   return (
     <div className={styles.container}>
       <Header
         title={
-          ["new", "add", "+"].includes(match.params.id.toLowerCase())
+          match.url.endsWith("new")
             ? "Create new technician"
             : "Edit technician"
         }
       />
       {loading && <h3>Loading ...</h3>}
-      {error && <h3>ERROR {error && error.message}</h3>}
+      {error && <h3>{error}</h3>}
       <div className={styles.card}>
+        {/* TODO los que correspondan... */}
         <form onSubmit={handleOnSubmit}>
           <label>
             <span>Id</span>
