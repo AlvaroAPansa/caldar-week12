@@ -35,11 +35,17 @@ function CustomerDetail( {match, history} ) {
 
     const parsedId = parseInt(formData.id);
     let buildingsArray;
-    if (formData.buildings.length === 0) {
-      buildingsArray = new Array();
+    
+    if ((typeof formData.buildings) === "string") {
+      if (formData.buildings.length === 0) {
+        buildingsArray = new Array();
+      } else {
+        buildingsArray = formData.buildings.replace(/, +/g, ",").split(",").map(Number);
+      };
     } else {
-      buildingsArray = formData.buildings.replace(/, +/g, ",").split(",").map(Number);
-    };
+      buildingsArray = formData.buildings;
+    }
+
     const parsedFormData = {
       ...formData,
       id: parsedId,
