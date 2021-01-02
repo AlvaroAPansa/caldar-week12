@@ -38,7 +38,7 @@
   gap: 1rem;
 }
 
-.card label>input{
+.card label+input{
   width: 100%;
 }
 

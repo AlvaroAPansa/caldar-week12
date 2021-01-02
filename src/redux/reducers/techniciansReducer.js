@@ -2,7 +2,6 @@ import {
   FETCH_RESOURCE_BEGIN,
   FETCH_RESOURCE_SUCCESS,
   FETCH_RESOURCE_FAILURE,
-  FORM_UPDATE_FIELD,
   FORM_SUBMIT_BEGIN,
   FORM_SUBMIT_SUCCESS,
   FORM_SUBMIT_FAILURE,
@@ -71,17 +70,6 @@ export default function techiciansReducer(state = initialState, action) {
         loading: false,
         error: action.payload.error,
       };
-
-    // case FORM_UPDATE_FIELD:
-    //   const input = action.payload.event.target;
-    //   const nState = { ...state };
-    //   // TODO como tengo checkboxes no toda la data entra de una en mi formData
-    //   if (input.type === "checkbox") {
-    //     nState.formData.expertise[input.name] = input.checked;
-    //   } else {
-    //     nState.formData[input.name] = input.value;
-    //   }
-    //   return nState;
 
     case FORM_SUBMIT_BEGIN:
       return {

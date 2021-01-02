@@ -6,29 +6,18 @@ import Header from "../../shared/Header/Header";
 
 import {
   fetchResourceList,
-  handleModifyFormData,
-  handleSubmit as handleSubmit_TE,
+  handleSubmit,
 } from "../../../redux/actions/technicianActions"; // TODO las acciones de su recurso
 
 import { Form, Field } from "react-final-form";
 
-import {
-  TextInput,
-  DropdownInput,
-  ChexboxInput,
-} from "../../shared/FormInputs/FormInputs";
+import { TextInput } from "../../shared/FormInputs/FormInputs"; // TODO el elemento que les guste o agregarlo
 
 import {
   required,
-  mustBeNumber,
-  minValue,
   composeValidators,
   mustBeEmail,
-} from "../../shared/FormInputs/formsValidations";
-
-const onSubmit = async (values) => {
-  window.alert(JSON.stringify(values, 0, 2));
-};
+} from "../../shared/FormInputs/formsValidations"; // TODO usar el validar que les guste o agregarlo
 
 function TechnicianDetail({ match, history }) {
   const { loading, error, formData } = useSelector(
@@ -49,16 +38,8 @@ function TechnicianDetail({ match, history }) {
     );
   }, [history]);
 
-  // function handleOnChange(e) {
-  //   dispatch(handleModifyFormData(e));
-  // }
-
-  // function handleOnSubmit(e) {
-  //   e.preventDefault();
-  //   dispatch(handleSubmit_TE(formData, history, match));
-  // }
   async function handleOnSubmit(values) {
-    dispatch(handleSubmit_TE(values, history, match));
+    dispatch(handleSubmit(values, history, match));
   }
 
   return (
@@ -78,7 +59,7 @@ function TechnicianDetail({ match, history }) {
           <Form
             initialValues={formData}
             onSubmit={handleOnSubmit}
-            render={({ handleSubmit, form, submitting, pristine, values }) => (
+            render={({ handleSubmit, form, submitting, pristine }) => (
               <form onSubmit={handleSubmit}>
                 <Field name="id">
                   {(props) => <TextInput {...props} label="Id" disabled />}
@@ -147,6 +128,10 @@ function TechnicianDetail({ match, history }) {
                   <label htmlFor="D">D</label>
                 </div>
                 <div className={styles.buttons}>
+                  <button type="button" onClick={() => history.goBack()}>
+                    Back
+                  </button>
+                  <br />
                   <button
                     type="button"
                     onClick={form.reset}
@@ -154,20 +139,16 @@ function TechnicianDetail({ match, history }) {
                   >
                     Reset
                   </button>
-                  <button type="button" onClick={() => history.goBack()}>
-                    Back
-                  </button>
+                  <br />
                   <button type="submit" disabled={submitting || pristine}>
                     OK
                   </button>
-                  <pre>{JSON.stringify(values, 0, 2)}</pre>
                 </div>
               </form>
             )}
           />
         </div>
       )}
-      <pre>{JSON.stringify(formData, 0, 2)}</pre>
     </div>
   );
 }
