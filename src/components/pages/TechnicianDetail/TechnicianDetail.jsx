@@ -72,11 +72,11 @@ function TechnicianDetail({ id }) {
                 {(props) => <TextInput {...props} label="Last Name" />}
               </Field>
 
-              <Field name="address">
+              <Field name="address" validate={required}>
                 {(props) => <TextInput {...props} label="Address" />}
               </Field>
 
-              <Field name="phone">
+              <Field name="phone" validate={required}>
                 {(props) => <TextInput {...props} label="Phone" />}
               </Field>
 
