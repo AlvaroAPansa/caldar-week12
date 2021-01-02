@@ -19,20 +19,23 @@ const initialState = {
     email: "",
     address: "",
     phone: "",
-    expertise: {
-      A: false,
-      B: false,
-      C: false,
-      D: false,
-    },
+    expertise: [],
+    // expertise: {
+    //   A: false,
+    //   B: false,
+    //   C: false,
+    //   D: false,
+    // },
   },
 };
 
 function refactorData(data) {
-  /* 
+  /*
   TODO expertise me viene en un array y yo lo muestro como checkboxes.
   por eso cuando le pegue al servidor y me devuelve el dato, lo que hago es
   "convertirlo" tal cual lo uso en el form.
+
+  Mongo agrega mas data que no nos interesa, la sacamos "filtrando" lo que necesitamos.
   */
   return {
     id: data.id,
@@ -41,12 +44,7 @@ function refactorData(data) {
     email: data.email,
     address: data.address,
     phone: data.phone,
-    expertise: {
-      A: data.expertise.includes("A"),
-      B: data.expertise.includes("B"),
-      C: data.expertise.includes("C"),
-      D: data.expertise.includes("D"),
-    },
+    expertise: data.expertise,
   };
 }
 
@@ -63,6 +61,7 @@ export default function techiciansReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        // formData: refactorData(action.payload.resources),
         formData: refactorData(action.payload.resources),
       };
 
@@ -73,16 +72,16 @@ export default function techiciansReducer(state = initialState, action) {
         error: action.payload.error,
       };
 
-    case FORM_UPDATE_FIELD:
-      const input = action.payload.event.target;
-      const nState = { ...state };
-      // TODO como tengo checkboxes no toda la data entra de una en mi formData
-      if (input.type === "checkbox") {
-        nState.formData.expertise[input.name] = input.checked;
-      } else {
-        nState.formData[input.name] = input.value;
-      }
-      return nState;
+    // case FORM_UPDATE_FIELD:
+    //   const input = action.payload.event.target;
+    //   const nState = { ...state };
+    //   // TODO como tengo checkboxes no toda la data entra de una en mi formData
+    //   if (input.type === "checkbox") {
+    //     nState.formData.expertise[input.name] = input.checked;
+    //   } else {
+    //     nState.formData[input.name] = input.value;
+    //   }
+    //   return nState;
 
     case FORM_SUBMIT_BEGIN:
       return {
@@ -92,10 +91,15 @@ export default function techiciansReducer(state = initialState, action) {
       };
 
     case FORM_SUBMIT_SUCCESS:
-      const nState1 = { ...state, loading: false };
-      if (!action.payload.newId) return nState1;
-      nState1.formData.id = action.payload.newId;
-      return nState1;
+      return {
+        ...state,
+        loading: false,
+        formData: refactorData(action.payload),
+      };
+    // const nState1 = { ...state, loading: false };
+    // if (!action.payload.newId) return nState1;
+    // nState1.formData = action.payload;
+    // return nState1;
 
     case FORM_SUBMIT_FAILURE:
       return {
