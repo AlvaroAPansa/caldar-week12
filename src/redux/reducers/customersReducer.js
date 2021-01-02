@@ -32,7 +32,7 @@ function refactorData(data) {
     phone: data.phone,
     fiscalAddress: data.fiscalAddress,
     type: data.type,
-    buildings: data.buildings.join(),
+    buildings: data.buildings,
   };
 }
 

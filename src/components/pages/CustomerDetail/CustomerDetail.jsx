@@ -32,7 +32,21 @@ function CustomerDetail( {match, history} ) {
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    dispatch(handleSubmit(formData, history, match));
+
+    const parsedId = parseInt(formData.id);
+    let buildingsArray;
+    if (formData.buildings.length === 0) {
+      buildingsArray = new Array();
+    } else {
+      buildingsArray = formData.buildings.replace(/, +/g, ",").split(",").map(Number);
+    };
+    const parsedFormData = {
+      ...formData,
+      id: parsedId,
+      buildings: buildingsArray,
+    }
+
+    dispatch(handleSubmit(parsedFormData, history, match));
   }
 
   return (

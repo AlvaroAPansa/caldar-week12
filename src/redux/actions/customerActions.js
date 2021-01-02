@@ -64,7 +64,8 @@ export function handleSubmit(formData, history, match) {
     dispatch(formSubmitBegin());
 
     const formParsedData = {...formData};
-
+    console.log(formParsedData);
+    
     fetch(urlServer.PUT_POST, {
       method: isNewResource ? "POST" : "PUT",
       headers: {
