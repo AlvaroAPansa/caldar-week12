@@ -2,7 +2,6 @@ import {
   FETCH_RESOURCE_BEGIN,
   FETCH_RESOURCE_SUCCESS,
   FETCH_RESOURCE_FAILURE,
-  FORM_UPDATE_FIELD,
   FORM_SUBMIT_BEGIN,
   FORM_SUBMIT_SUCCESS,
   FORM_SUBMIT_FAILURE,
@@ -52,32 +51,16 @@ function fetchResourceFailure(error) {
   };
 }
 
-export function handleModifyFormData(event) {
-  return {
-    type: FORM_UPDATE_FIELD,
-    payload: { event },
-  };
-}
-
 export function handleSubmit(formData, history, match) {
   return (dispatch) => {
     dispatch(formSubmitBegin());
-
-    const formParsedData = { ...formData };
-    const expertise = [];
-    if (formParsedData.expertise.A) expertise.push("A");
-    if (formParsedData.expertise.B) expertise.push("B");
-    if (formParsedData.expertise.C) expertise.push("C");
-    if (formParsedData.expertise.D) expertise.push("D");
-    formParsedData.expertise = expertise;
 
     fetch(urlServer.PUT_POST, {
       method: isNewResource ? "POST" : "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      // XXX is this legal?
-      body: JSON.stringify(formParsedData),
+      body: JSON.stringify(formData),
     }).then(
       (r) => {
         if (!r.ok)
@@ -85,15 +68,13 @@ export function handleSubmit(formData, history, match) {
             formSubmitFailure("No se ha podido actualizar el tecnico!")
           );
 
-        let newId = "";
         if (isNewResource) {
-          r.json().then((_data) => {
-            newId = _data.id;
-            dispatch(formSubmitSuccess(newId));
-            return history.push(`${match.path.replace(":id", newId)}`);
+          r.json().then((newData) => {
+            dispatch(formSubmitSuccess(newData));
+            return history.push(`${match.path.replace(":id", newData.id)}`);
           });
         }
-        dispatch(formSubmitSuccess());
+        dispatch(formSubmitSuccess(formData));
       },
       (error) => dispatch(formSubmitFailure(error.message))
     );
@@ -105,10 +86,10 @@ function formSubmitBegin() {
     type: FORM_SUBMIT_BEGIN,
   };
 }
-function formSubmitSuccess(newId) {
+function formSubmitSuccess(updatedData) {
   return {
     type: FORM_SUBMIT_SUCCESS,
-    payload: { newId },
+    payload: updatedData,
   };
 }
 

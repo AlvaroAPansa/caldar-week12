@@ -6,9 +6,18 @@ import Header from "../../shared/Header/Header";
 
 import {
   fetchResourceList,
-  handleModifyFormData,
   handleSubmit,
 } from "../../../redux/actions/technicianActions"; // TODO las acciones de su recurso
+
+import { Form, Field } from "react-final-form";
+
+import { TextInput } from "../../shared/FormInputs/FormInputs"; // TODO el elemento que les guste o agregarlo
+
+import {
+  required,
+  composeValidators,
+  mustBeEmail,
+} from "../../shared/FormInputs/formsValidations"; // TODO usar el validar que les guste o agregarlo
 
 function TechnicianDetail({ match, history }) {
   const { loading, error, formData } = useSelector(
@@ -29,13 +38,8 @@ function TechnicianDetail({ match, history }) {
     );
   }, [history]);
 
-  function handleOnChange(e) {
-    dispatch(handleModifyFormData(e));
-  }
-
-  function handleOnSubmit(e) {
-    e.preventDefault();
-    dispatch(handleSubmit(formData, history, match));
+  async function handleOnSubmit(values) {
+    dispatch(handleSubmit(values, history, match));
   }
 
   return (
@@ -49,124 +53,102 @@ function TechnicianDetail({ match, history }) {
       />
       {loading && <h3>Loading ...</h3>}
       {error && <h3>{error}</h3>}
-      <div className={styles.card}>
-        {/* TODO los que correspondan... */}
-        <form onSubmit={handleOnSubmit}>
-          <label>
-            <span>Id</span>
-            <br />
-            <input
-              disabled
-              type="text"
-              value={formData.id}
-              name="id"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>First Name</span>
-            <br />
-            <input
-              type="text"
-              value={formData.first_name}
-              name="first_name"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Last Name</span>
-            <br />
-            <input
-              type="text"
-              value={formData.last_name}
-              name="last_name"
-              onChange={handleOnChange}
-            />
-          </label>
+      {!loading && (
+        <div className={styles.card}>
+          {/* TODO los que correspondan... */}
+          <Form
+            initialValues={formData}
+            onSubmit={handleOnSubmit}
+            render={({ handleSubmit, form, submitting, pristine }) => (
+              <form onSubmit={handleSubmit}>
+                <Field name="id">
+                  {(props) => <TextInput {...props} label="Id" disabled />}
+                </Field>
 
-          <label>
-            <span>Address</span>
-            <br />
-            <input
-              type="text"
-              value={formData.address}
-              name="address"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Phone</span>
-            <br />
-            <input
-              type="text"
-              value={formData.phone}
-              name="phone"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Email</span>
-            <br />
-            <input
-              type="text"
-              value={formData.email}
-              name="email"
-              onChange={handleOnChange}
-            />
-          </label>
-          <div className={styles.checkboxes}>
-            <span>Expertise</span>
-            <br />
-            <input
-              type="checkbox"
-              name="A"
-              value="A"
-              id="A"
-              checked={formData.expertise.A}
-              onChange={handleOnChange}
-            />
-            <label htmlFor="A">A</label>
-            <br />
-            <input
-              type="checkbox"
-              name="B"
-              value="B"
-              id="B"
-              checked={formData.expertise.B}
-              onChange={handleOnChange}
-            />
-            <label htmlFor="B">B</label>
-            <br />
-            <input
-              type="checkbox"
-              name="C"
-              value="C"
-              id="C"
-              checked={formData.expertise.C}
-              onChange={handleOnChange}
-            />
-            <label htmlFor="C">C</label>
-            <br />
-            <input
-              type="checkbox"
-              name="D"
-              value="D"
-              id="D"
-              checked={formData.expertise.D}
-              onChange={handleOnChange}
-            />
-            <label htmlFor="D">D</label>
-          </div>
-          <div className={styles.buttons}>
-            <input
-              type="button"
-              value="Back"
-              onClick={() => history.goBack()}
-            />
-            <input type="submit" value="Confirm" />
-          </div>
-        </form>
-      </div>
+                <Field name="first_name" validate={required}>
+                  {(props) => <TextInput {...props} label="First Name" />}
+                </Field>
+
+                <Field name="last_name" validate={required}>
+                  {(props) => <TextInput {...props} label="Last Name" />}
+                </Field>
+
+                <Field name="address">
+                  {(props) => <TextInput {...props} label="Address" />}
+                </Field>
+
+                <Field name="phone">
+                  {(props) => <TextInput {...props} label="Phone" />}
+                </Field>
+
+                <Field
+                  name="email"
+                  validate={composeValidators(required, mustBeEmail)}
+                >
+                  {(props) => <TextInput {...props} label="Email" />}
+                </Field>
+
+                <div className={styles.checkboxes}>
+                  <span>Expertise</span>
+                  <br />
+                  <Field
+                    name="expertise"
+                    component="input"
+                    type="checkbox"
+                    value="A"
+                    id="A"
+                  />
+                  <label htmlFor="A">A</label>
+                  <br />
+                  <Field
+                    name="expertise"
+                    component="input"
+                    type="checkbox"
+                    value="B"
+                    id="B"
+                  />
+                  <label htmlFor="B">B</label>
+                  <br />
+                  <Field
+                    name="expertise"
+                    component="input"
+                    type="checkbox"
+                    value="C"
+                    id="C"
+                  />
+                  <label htmlFor="C">C</label>
+                  <br />
+                  <Field
+                    name="expertise"
+                    component="input"
+                    type="checkbox"
+                    value="D"
+                    id="D"
+                  />
+                  <label htmlFor="D">D</label>
+                </div>
+                <div className={styles.buttons}>
+                  <button type="button" onClick={() => history.goBack()}>
+                    Back
+                  </button>
+                  <br />
+                  <button
+                    type="button"
+                    onClick={form.reset}
+                    disabled={submitting || pristine}
+                  >
+                    Reset
+                  </button>
+                  <br />
+                  <button type="submit" disabled={submitting || pristine}>
+                    OK
+                  </button>
+                </div>
+              </form>
+            )}
+          />
+        </div>
+      )}
     </div>
   );
 }
