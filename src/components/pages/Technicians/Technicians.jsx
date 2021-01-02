@@ -12,6 +12,7 @@ import {
 import { closeModal, openModal } from "../../../redux/actions/modalActions";
 
 import YesNoMessage from "../../shared/YesNoMessage/YesNoMessage";
+import TechnicianDetail from "../TechnicianDetail/TechnicianDetail";
 
 // TODO cambiar el ENDPOINT_TECNHICIANS por lo que corresponda
 import { ENDPOINT_TECHNICIANS as BASE_ENDPOINT } from "../../../constants";
@@ -72,7 +73,7 @@ function Technicians({ history }) {
             // Acciones que hacer cada fila (creería que no hay que tocarlo)
             {
               fn: (item) =>
-                history.push(`${history.location.pathname}/${item.id}`),
+                dispatch(openModal(<TechnicianDetail id={item.id} />)), // TODO cambiar detalle
               displayName: "✏", // Edita el recurso
               hint: "Edit technician",
             },
@@ -98,7 +99,7 @@ function Technicians({ history }) {
         />
       )}
       <ButtonAdd
-        redirect={() => history.push(`${history.location.pathname}/new`)}
+        redirect={() => dispatch(openModal(<TechnicianDetail id={null} />))}
         title="Create new technician"
       />
     </div>

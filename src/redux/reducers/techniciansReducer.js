@@ -5,6 +5,7 @@ import {
   FORM_SUBMIT_BEGIN,
   FORM_SUBMIT_SUCCESS,
   FORM_SUBMIT_FAILURE,
+  FETCH_RESOURCE_CLEAR_FIELDS,
 } from "../types/technicians";
 
 const initialState = {
@@ -82,8 +83,11 @@ export default function techiciansReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        error: null,
+        error: action.payload.error,
       };
+
+    case FETCH_RESOURCE_CLEAR_FIELDS:
+      return { ...initialState };
 
     default:
       return state;

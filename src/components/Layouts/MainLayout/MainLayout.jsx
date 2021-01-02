@@ -11,7 +11,6 @@ import Schedule from "../../pages/Schedule/Schedule";
 import ScheduleDetail from "../../pages/ScheduleDetail/ScheduleDetail";
 import Settings from "../../pages/Settings/Settings";
 import Technicians from "../../pages/Technicians/Technicians";
-import TechnicianDetail from "../../pages/TechnicianDetail/TechnicianDetail";
 import Home from "../../pages/Home/Home";
 import Modal from "../../shared/Modal/Modal";
 
@@ -40,7 +39,6 @@ function MainLayout() {
           <Route path="/settings/:id" component={Settings} />
           <Route path="/settings" exact component={Settings} />
 
-          <Route path="/technicians/:id" component={TechnicianDetail} />
           <Route path="/technicians" exact component={Technicians} />
 
           <Route path="/" exact component={Home} />

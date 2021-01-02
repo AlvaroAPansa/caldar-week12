@@ -5,6 +5,7 @@ import {
   FORM_SUBMIT_BEGIN,
   FORM_SUBMIT_SUCCESS,
   FORM_SUBMIT_FAILURE,
+  FETCH_RESOURCE_CLEAR_FIELDS,
 } from "../types/technicians";
 
 let urlServer = "";
@@ -31,6 +32,12 @@ export function fetchResourceList({ isNew, url }) {
   };
 }
 
+export function clearFields() {
+  return {
+    type: FETCH_RESOURCE_CLEAR_FIELDS,
+  };
+}
+
 function fetchResourceBegin() {
   return {
     type: FETCH_RESOURCE_BEGIN,
@@ -51,7 +58,7 @@ function fetchResourceFailure(error) {
   };
 }
 
-export function handleSubmit(formData, history, match) {
+export function handleSubmit(formData, onSuccess) {
   return (dispatch) => {
     dispatch(formSubmitBegin());
 
@@ -64,17 +71,9 @@ export function handleSubmit(formData, history, match) {
     }).then(
       (r) => {
         if (!r.ok)
-          return dispatch(
-            formSubmitFailure("No se ha podido actualizar el tecnico!")
-          );
+          dispatch(formSubmitFailure("No se ha podido actualizar el tecnico!"));
 
-        if (isNewResource) {
-          r.json().then((newData) => {
-            dispatch(formSubmitSuccess(newData));
-            return history.push(`${match.path.replace(":id", newData.id)}`);
-          });
-        }
-        dispatch(formSubmitSuccess(formData));
+        onSuccess();
       },
       (error) => dispatch(formSubmitFailure(error.message))
     );
@@ -86,6 +85,7 @@ function formSubmitBegin() {
     type: FORM_SUBMIT_BEGIN,
   };
 }
+
 function formSubmitSuccess(updatedData) {
   return {
     type: FORM_SUBMIT_SUCCESS,

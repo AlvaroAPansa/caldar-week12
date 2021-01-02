@@ -82,3 +82,19 @@ const deleteResourceError = (error) => ({
   type: DELETE_RESOURCE_FAILURE,
   payload: { error },
 });
+
+export function updateTable() {
+  return async (dispatch) => {
+    dispatch(fetchResourceBegin());
+
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+      response.ok
+        ? dispatch(fetchResourceSuccess(json))
+        : dispatch(fetchResourceFailure(json));
+    } catch (error) {
+      dispatch(fetchResourceFailure(error.message));
+    }
+  };
+}
