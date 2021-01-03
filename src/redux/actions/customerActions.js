@@ -32,6 +32,12 @@ export function fetchResourceList({isNew, url}) {
   };
 }
 
+export function clearFields() {
+  return {
+    type: FETCH_RESOURCE_CLEAR_FIELDS,
+  }
+}
+
 function fetchResourceBegin() {
   return {
     type: FETCH_RESOURCE_BEGIN,
@@ -59,35 +65,22 @@ export function handleModifyFormData(event) {
   };
 }
 
-export function handleSubmit(formData, history, match) {
+export function handleSubmit(formData, onSuccess) {
   return (dispatch) => {
     dispatch(formSubmitBegin());
 
-    const formParsedData = {...formData};
-    console.log(formParsedData);
-    
     fetch(urlServer.PUT_POST, {
       method: isNewResource ? "POST" : "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formParsedData),
+      body: JSON.stringify(formData),
     }).then(
       (r) => {
         if (!r.ok)
-        return dispatch(
-          formSubmitFailure("Customer update failed!")
+          dispatch(formSubmitFailure("Customer update failed!")
         );
-
-        let newId = "";
-        if (isNewResource) {
-          r.json().then((_data) => {
-            newId = _data.id;
-            dispatch(formSubmitSuccess());
-            return history.push(`${match.path.replace(":id", newId)}`);
-          });
-        }
-        dispatch(formSubmitSuccess());
+        onSuccess();
       },
       (error) => dispatch(formSubmitFailure(error.message))
     );
@@ -99,10 +92,11 @@ function formSubmitBegin() {
     type: FORM_SUBMIT_BEGIN,
   };
 }
-function formSubmitSuccess(newId) {
+
+function formSubmitSuccess(updatedData) {
   return {
     type: FORM_SUBMIT_SUCCESS,
-    payload: { newId },
+    payload: { updatedData },
   };
 }
 
