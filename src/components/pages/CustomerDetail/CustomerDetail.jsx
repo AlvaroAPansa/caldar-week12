@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {Form, Field} from "react-final-form";
 import styles from "./CustomerDetail.module.css";
 import Header from "../../shared/Header/Header";
 import {ENDPOINT_CUSTOMERS as BASE_ENDPOINT} from "../../../constants";
@@ -30,29 +31,25 @@ function CustomerDetail( {match, history} ) {
     dispatch(handleModifyFormData(e));
   }
 
-  function handleOnSubmit(e) {
-    e.preventDefault();
-
-    const parsedId = parseInt(formData.id);
+  function handleOnSubmit(values) {
+    const parsedId = parseInt(values.id);
     let buildingsArray;
       
-    if ((typeof formData.buildings) === "string") {
-      if (formData.buildings.length === 0) {
-        buildingsArray = new Array();
+    if ((typeof values.buildings) === "string") {
+      if (values.buildings.length === 0) {
+        values.buildings = new Array();
       } else {
-        buildingsArray = formData.buildings.replace(/, +/g, ",").split(",").map(Number);
+        values.buildings = values.buildings.split(",").map(Number);
       };
-    } else {
-      buildingsArray = formData.buildings;
     }
 
-    const parsedFormData = {
+    /*const parsedFormData = {
       ...formData,
       id: parsedId,
       buildings: buildingsArray,
-    }
+    }*/
 
-    dispatch(handleSubmit(parsedFormData, history, match));
+    dispatch(handleSubmit(values, history, match));
   }
 
   return (
