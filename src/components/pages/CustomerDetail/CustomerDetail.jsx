@@ -64,97 +64,70 @@ function CustomerDetail( {match, history} ) {
       {loading && <h3>Loading...</h3>}
       {error && <h3>{error}</h3>}
       <div className={styles.card}>
-        <form onSubmit={handleOnSubmit}>
-          <label>
-            <span>ID</span>
-            <br/>
-            <input 
-              //disabled
-              type="text"
-              value={formData.id}
-              name="id"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Business Name</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.businessName}
-              name="businessName"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Contact Name</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.contactName}
-              name="contactName"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Email</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.email}
-              name="email"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Phone</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.phone}
-              name="phone"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Fiscal Address</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.fiscalAddress}
-              name="fiscalAddress"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Type</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.type}
-              name="type"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Buildings</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.buildings}
-              name="buildings"
-              onChange={handleOnChange}
-            />
-          </label>
-          <div className={styles.buttons}>
-            <input
-              type="button"
-              value="Back"
-              onClick={() => history.goBack()}
-            />
-            <input type="submit" value="Confirm" />
-          </div>
-        </form>
+        <Form
+          onSubmit = {handleOnSubmit}
+          initialValues = {formData}
+          render={({handleSubmit, values}) => (
+            <form onSubmit={handleSubmit}>
+              <label>ID</label>
+                <Field
+                  //disabled
+                  name="id"
+                  component="input"
+                  type="text"
+                />
+              <label>Business Name</label>
+                <Field
+                  name="businessName"
+                  component="input"
+                  type="text"
+                />
+              <label>Contact Name</label>
+                <Field 
+                  name="contactName"
+                  component="input"
+                  type="text"
+                />
+              <label>Email</label>
+                <Field 
+                  name="email"
+                  component="input"
+                  type="text"
+                />
+              <label>Phone</label>
+                <Field
+                  name="phone"
+                  component="input"
+                  type="text"
+                />
+              <label>Fiscal Address</label>
+                <Field 
+                  name="fiscalAddress"
+                  component="input"
+                  type="text"
+                />
+              <label>Type</label>
+                <Field name="type" component="select">
+                  <option value="construction company">Construction Company</option>
+                  <option value="particular">Particular</option>
+                </Field>
+              <label>Buildings</label>
+                <Field 
+                  name="buildings"
+                  component="input"
+                  type="text"
+                />
+              <div className={styles.buttons}>
+                <input
+                  type="button"
+                  value="Back"
+                  onClick={() => history.goBack()}
+                />
+                <input type="submit" value="Confirm" />
+              </div>
+            </form>
+          )}
+        />
       </div>
     </div>
   );
