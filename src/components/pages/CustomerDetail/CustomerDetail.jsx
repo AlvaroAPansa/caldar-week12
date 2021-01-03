@@ -67,7 +67,7 @@ function CustomerDetail( {match, history} ) {
         <Form
           onSubmit = {handleOnSubmit}
           initialValues = {formData}
-          render={({handleSubmit, values}) => (
+          render={({handleSubmit, form, submitting, pristine, values}) => (
             <form onSubmit={handleSubmit}>
               <label>ID</label>
                 <Field
@@ -118,12 +118,16 @@ function CustomerDetail( {match, history} ) {
                   type="text"
                 />
               <div className={styles.buttons}>
-                <input
+                <button
                   type="button"
                   value="Back"
                   onClick={() => history.goBack()}
                 />
-                <input type="submit" value="Confirm" />
+                <button 
+                  type="submit" 
+                  value="Confirm" 
+                  disabled={submitting || pristine} 
+                />
               </div>
             </form>
           )}
