@@ -6,6 +6,9 @@ import ButtonAdd from "../../shared/CreateNewResource/CreateNewResource";
 import {useSelector, useDispatch} from "react-redux";
 import {fetchResourceList, filterData, deleteResource} from "../../../redux/actions/tableActions"
 import {ENDPOINT_CUSTOMERS as BASE_ENDPOINT} from "../../../constants";
+import CustomerDetail from "../CustomerDetail/CustomerDetail";
+import YesNoMessage from "../../shared/YesNoMessage/YesNoMessage";
+import { closeModal, openModal } from "../../../redux/actions/modalActions";
 
 function Customers({history}) {
   const { data, loading, error } = useSelector((s) => s.Table_Selector);
@@ -63,12 +66,26 @@ function Customers({history}) {
           ]}
           actions={[
             {
-              fn: (id) => history.push(`${history.location.pathname}/${id}`),
+              fn: (item) => 
+              dispatch(openModal(<CustomerDetail id={item.id} />)),
               displayName: "✏",
               hint: "Edit customer",
             },
             {
-              fn: (id) => dispatch(deleteResource(id)),
+              fn: (item) => 
+              dispatch(
+                openModal(
+                  <YesNoMessage
+                    title="Delete Customer"
+                    message={`Are you sure you want to delete the customer ${item.businessName}?`}
+                    onYes={() =>{
+                      dispatch(deleteResource(item.id));
+                      dispatch(closeModal());
+                    }}
+                    onNo={() => dispatch(closeModal())}
+                  />
+                )
+              ),
               displayName: "❌",
               hint: "Delete customer",
             },
@@ -76,7 +93,7 @@ function Customers({history}) {
         />
       )}
       <ButtonAdd 
-        redirect={() => history.push(`${history.location.pathname}/new`)}
+        redirect={() => dispatch(openModal(<CustomerDetail id={null} />))}
         title="Create new customer"
       />
     </div>
