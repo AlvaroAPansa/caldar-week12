@@ -58,13 +58,6 @@ function fetchResourceFailure(error) {
   };
 }
 
-export function handleModifyFormData(event) {
-  return {
-    type: FORM_UPDATE_FIELD,
-    payload: { event },
-  };
-}
-
 export function handleSubmit(formData, onSuccess) {
   return (dispatch) => {
     dispatch(formSubmitBegin());
