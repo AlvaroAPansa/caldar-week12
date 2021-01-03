@@ -4,7 +4,7 @@ import styles from "./MainLayout.module.css";
 import Navbar from "../../shared/Navbar/Navbar";
 
 import Boilers from "../../pages/Boilers/Boilers";
-import BoilerDetail from "../../pages/BoilerDetail/BoilerDetail"
+import BoilerDetail from "../../pages/BoilerDetail/BoilerDetail";
 import Customers from "../../pages/Customers/Customers";
 import CustomerDetail from "../../pages/CustomerDetail/CustomerDetail";
 import Reports from "../../pages/Reports/Reports";
@@ -12,8 +12,8 @@ import Schedule from "../../pages/Schedule/Schedule";
 import ScheduleDetail from "../../pages/ScheduleDetail/ScheduleDetail";
 import Settings from "../../pages/Settings/Settings";
 import Technicians from "../../pages/Technicians/Technicians";
-import TechnicianDetail from "../../pages/TechnicianDetail/TechnicianDetail";
 import Home from "../../pages/Home/Home";
+import Modal from "../../shared/Modal/Modal";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
@@ -40,7 +40,6 @@ function MainLayout() {
           <Route path="/settings/:id" component={Settings} />
           <Route path="/settings" exact component={Settings} />
 
-          <Route path="/technicians/:id" component={TechnicianDetail} />
           <Route path="/technicians" exact component={Technicians} />
 
           <Route path="/" exact component={Home} />
@@ -49,6 +48,7 @@ function MainLayout() {
           </Route>
         </Switch>
       </div>
+      <Modal />
     </div>
   );
 }

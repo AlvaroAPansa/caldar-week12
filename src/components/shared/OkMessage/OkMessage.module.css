@@ -1,0 +1,13 @@
+/* */
+.buttons {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.buttons button {
+  padding: 0.4rem 0.7rem;
+  margin-left: 1rem;
+  border: none;
+  background-color: var(--orange-bg);
+  color: var(--white);
+}
