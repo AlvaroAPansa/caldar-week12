@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Form, Field} from "react-final-form";
 import styles from "./CustomerDetail.module.css";
-import Header from "../../shared/Header/Header";
 import {ENDPOINT_CUSTOMERS as BASE_ENDPOINT} from "../../../constants";
-import {fetchResourceList, handleModifyFormData, handleSubmit} from "../../../redux/actions/customerActions";
+import {clearFields, fetchResourceList, handleModifyFormData, handleSubmit} from "../../../redux/actions/customerActions";
+import { closeModal } from "../../../redux/actions/modalActions";
+import { updateTable } from "../../../redux/actions/tableActions";
+import Card from "../../shared/Card/Card";
+import { composeValidators, mustBeEmail, required } from "../../shared/FormInputs/formsValidations";
+import { TextInput, DropdownInput } from "../../shared/FormInputs/FormInputs";
 
 function CustomerDetail( { id } ) {
   const {loading, error, formData} = useSelector(
@@ -14,127 +18,89 @@ function CustomerDetail( { id } ) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(clearF)
+    dispatch(clearFields);
     dispatch(
       fetchResourceList({
-        isNew: match.url.endsWith("new"),
+        isNew: !id,
         url: {
-          GET: `${BASE_ENDPOINT}/${match.params.id}`,
-          PUT_POST: match.url.endsWith("new")
-          ? `${BASE_ENDPOINT}`
-          : `${BASE_ENDPOINT}/${match.params.id}`,
+          GET: `${BASE_ENDPOINT}/${id}`,
+          PUT_POST: !id ? `${BASE_ENDPOINT}` : `${BASE_ENDPOINT}/${id}`,
         },
       })
     );
-  }, [history]);
+  }, [id]);
 
-  function handleOnChange(e) {
-    dispatch(handleModifyFormData(e));
-  }
-
-  function handleOnSubmit(values) {
-    const parsedId = parseInt(values.id);
-    let buildingsArray;
-      
-    if ((typeof values.buildings) === "string") {
-      if (values.buildings.length === 0) {
-        values.buildings = new Array();
-      } else {
-        values.buildings = values.buildings.split(",").map(Number);
-      };
-    }
-
-    /*const parsedFormData = {
-      ...formData,
-      id: parsedId,
-      buildings: buildingsArray,
-    }*/
-
-    dispatch(handleSubmit(values, history, match));
+  async function handleOnSubmit(values) {
+    dispatch(
+      handleSubmit(values, () => {
+        dispatch(closeModal());
+        dispatch(updateTable());
+      })
+    );
   }
 
   return (
-    <div className={styles.container}>
-      <Header 
-        title={
-          match.url.endsWith("new")
-          ? "Create new customer"
-          : "Edit technician"
-        }
-      />
-      {loading && <h3>Loading...</h3>}
-      {error && <h3>{error}</h3>}
-      <div className={styles.card}>
+    <Card title={!id ? "Create new technician" : "Edit technician"}>
+      <div className={styles.container}>
+        {loading && <h3>Loading...</h3>}
+        {error && <h3>{error}</h3>}
         <Form
           onSubmit = {handleOnSubmit}
           initialValues = {formData}
-          render={({handleSubmit, form, submitting, pristine, values}) => (
+          render={({handleSubmit, form, submitting, pristine}) => (
             <form onSubmit={handleSubmit}>
-              <label>ID</label>
-                <Field
-                  //disabled
-                  name="id"
-                  component="input"
-                  type="text"
-                />
-              <label>Business Name</label>
-                <Field
-                  name="businessName"
-                  component="input"
-                  type="text"
-                />
-              <label>Contact Name</label>
-                <Field 
-                  name="contactName"
-                  component="input"
-                  type="text"
-                />
-              <label>Email</label>
-                <Field 
-                  name="email"
-                  component="input"
-                  type="text"
-                />
-              <label>Phone</label>
-                <Field
-                  name="phone"
-                  component="input"
-                  type="text"
-                />
-              <label>Fiscal Address</label>
-                <Field 
-                  name="fiscalAddress"
-                  component="input"
-                  type="text"
-                />
-              <label>Type</label>
-                <Field name="type" component="select">
-                  <option value="construction company">Construction Company</option>
-                  <option value="particular">Particular</option>
-                </Field>
-              <label>Buildings</label>
-                <Field 
-                  name="buildings"
-                  component="input"
-                  type="text"
-                />
+              <Field name="id">
+                {(props) => <TextInput {...props} label="Id" disabled />}
+              </Field>
+              <Field name="businessName" validate={required}>
+                {(props) => <TextInput {...props} label="Business Name" />}
+              </Field>
+              <Field name="contactName" validate={required}>
+                {(props) => <TextInput {...props} label="Contact Name" />}
+              </Field>
+              <Field name="email" validate={composeValidators(required, mustBeEmail)}>
+                {(props) => <TextInput {...props} label="Email" />}
+              </Field>
+              <Field name="phone" validate={required}>
+                {(props) => <TextInput {...props} label="Phone" />}
+              </Field>
+              <Field name="fiscalAddress" validate={required}>
+                {(props) => <TextInput {...props} label="Fiscal Address" />}
+              </Field>
+              <Field name="type" validate={required}>
+                {(props) => 
+                  <DropdownInput 
+                    {...props} 
+                    label="Fiscal Address" 
+                    options={["contruction company","particular"]} 
+                  />
+                }
+              </Field>
+              <Field name="buldings" validate={required}>
+                {(props) => <TextInput {...props} label="Buildings" />}
+              </Field>
               <div className={styles.buttons}>
+                <button type="button" onClick={() => dispatch(closeModal())}>
+                  Close
+                </button>
+                <br />
                 <button
                   type="button"
-                  value="Back"
-                  onClick={() => history.goBack()}
-                />
-                <button 
-                  type="submit" 
-                  value="Confirm" 
-                  disabled={submitting || pristine} 
-                />
+                  onClick={form.reset}
+                  disabled={submitting || pristine}
+                >
+                  Reset
+                </button>
+                <br />
+                <button type="submit" disabled={submitting || pristine}>
+                  OK
+                </button>
               </div>
             </form>
           )}
         />
       </div>
-    </div>
+    </Card>
   );
 }
 
