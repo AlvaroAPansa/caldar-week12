@@ -7,7 +7,6 @@ import TechniciansR from "./reducers/techniciansReducer";
 import ModalR from "./reducers/modalReducer";
 import CustomersR from "./reducers/customersReducer";
 
-
 export default createStore(
   combineReducers({
     // List of Reducers
