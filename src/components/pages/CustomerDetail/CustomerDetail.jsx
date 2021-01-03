@@ -6,7 +6,7 @@ import Header from "../../shared/Header/Header";
 import {ENDPOINT_CUSTOMERS as BASE_ENDPOINT} from "../../../constants";
 import {fetchResourceList, handleModifyFormData, handleSubmit} from "../../../redux/actions/customerActions";
 
-function CustomerDetail( {match, history} ) {
+function CustomerDetail( { id } ) {
   const {loading, error, formData} = useSelector(
     (s) => s.Customers_Selector
   );
@@ -14,6 +14,7 @@ function CustomerDetail( {match, history} ) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(clearF)
     dispatch(
       fetchResourceList({
         isNew: match.url.endsWith("new"),
