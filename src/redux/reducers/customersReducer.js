@@ -2,10 +2,10 @@ import {
   FETCH_RESOURCE_BEGIN,
   FETCH_RESOURCE_SUCCESS,
   FETCH_RESOURCE_FAILURE,
-  FORM_UPDATE_FIELD,
   FORM_SUBMIT_BEGIN,
   FORM_SUBMIT_SUCCESS,
   FORM_SUBMIT_FAILURE,
+  FETCH_RESOURCE_CLEAR_FIELDS,
 } from "../types/customers";
 
 const initialState = {
@@ -59,12 +59,6 @@ export default function customersReducer(state = initialState, action) {
         error: action.payload.error,
       };
 
-    case FORM_UPDATE_FIELD:
-      const input = action.payload.event.target;
-      const nState = {...state};
-      nState.formData[input.name] = input.value;
-      return nState;
-
     case FORM_SUBMIT_BEGIN:
       return{
         ...state,
@@ -73,17 +67,21 @@ export default function customersReducer(state = initialState, action) {
       };
 
     case FORM_SUBMIT_SUCCESS:
-      const nState1 = {...state, loading: false};
-      if (!action.payload.newId) return nState1;
-      nState1.formData.id = action.payload.newId;
-      return nState1;
+      return {
+        ...state,
+        loading: false,
+        formData: refactorData(action.payload),
+      };
 
     case FORM_SUBMIT_FAILURE:
       return {
         ...state,
         loading: false,
-        error: null,
+        error: action.payload.error,
       };
+
+    case FETCH_RESOURCE_CLEAR_FIELDS:
+      return { ...initialState };
 
     default:
       return state;
