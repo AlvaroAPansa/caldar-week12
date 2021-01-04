@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {Form, Field} from "react-final-form";
 import styles from "./CustomerDetail.module.css";
 import {ENDPOINT_CUSTOMERS as BASE_ENDPOINT} from "../../../constants";
-import {clearFields, fetchResourceList, handleModifyFormData, handleSubmit} from "../../../redux/actions/customerActions";
+import {clearFields, fetchResourceList, handleSubmit} from "../../../redux/actions/customerActions";
 import { closeModal } from "../../../redux/actions/modalActions";
 import { updateTable } from "../../../redux/actions/tableActions";
 import Card from "../../shared/Card/Card";
@@ -42,7 +42,7 @@ function CustomerDetail( { id } ) {
   }
 
   return (
-    <Card title={!id ? "Create new technician" : "Edit technician"}>
+    <Card title={!id ? "Create new customer" : "Edit customer"}>
       <div className={styles.container}>
         {loading && <h3>Loading...</h3>}
         {error && <h3>{error}</h3>}
