@@ -20,7 +20,7 @@ function CustomerDetail( { id } ) {
   const types = ["construction company","particular"];
 
   useEffect(() => {
-    dispatch(clearFields);
+    dispatch(clearFields());
     dispatch(
       fetchResourceList({
         isNew: !id,
