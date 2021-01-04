@@ -33,6 +33,15 @@ function CustomerDetail( { id } ) {
   }, [id]);
 
   async function handleOnSubmit(values) {
+
+    if ((typeof values.buildings) === "string") {
+      if (values.buildings.length === 0) {
+        values.buildings = new Array();
+      } else {
+        values.buildings = values.buildings.split(",").map(Number);
+      };
+    }
+ 
     dispatch(
       handleSubmit(values, () => {
         dispatch(closeModal());
@@ -52,7 +61,7 @@ function CustomerDetail( { id } ) {
           render={({handleSubmit, form, submitting, pristine}) => (
             <form onSubmit={handleSubmit}>
               <Field name="id">
-                {(props) => <TextInput {...props} label="Id" disabled />}
+                {(props) => <TextInput {...props} label="Id" /*disabled*/ />}
               </Field>
               <Field name="businessName" validate={required}>
                 {(props) => <TextInput {...props} label="Business Name" />}
@@ -81,7 +90,7 @@ function CustomerDetail( { id } ) {
                   />
                 )}
               </Field>
-              <Field name="buldings" validate={required}>
+              <Field name="buildings" validate={required}>
                 {(props) => <TextInput {...props} label="Buildings" />}
               </Field>
               <div className={styles.buttons}>
