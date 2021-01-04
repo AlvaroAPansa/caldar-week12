@@ -17,6 +17,8 @@ function CustomerDetail( { id } ) {
 
   const dispatch = useDispatch();
 
+  const types = ["construction company","particular"];
+
   useEffect(() => {
     dispatch(clearFields);
     dispatch(
@@ -68,13 +70,16 @@ function CustomerDetail( { id } ) {
                 {(props) => <TextInput {...props} label="Fiscal Address" />}
               </Field>
               <Field name="type" validate={required}>
-                {(props) => 
+                {(props) => (
                   <DropdownInput 
+                    label="Type" 
+                    options={[
+                      { value: "construction company", displayName: "Construction Company" },
+                      { value: "particular", displayName: "Particular" },
+                    ]}
                     {...props} 
-                    label="Fiscal Address" 
-                    options={["contruction company","particular"]} 
                   />
-                }
+                )}
               </Field>
               <Field name="buldings" validate={required}>
                 {(props) => <TextInput {...props} label="Buildings" />}
