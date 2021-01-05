@@ -6,6 +6,7 @@ import TableR from "./reducers/tableReducer";
 import TechniciansR from "./reducers/techniciansReducer";
 import ModalR from "./reducers/modalReducer";
 import CustomersR from "./reducers/customersReducer";
+import BoilersR from "./reducers/boilersReducer"
 
 export default createStore(
   combineReducers({
@@ -14,6 +15,7 @@ export default createStore(
     Technicians_Selector: TechniciansR,
     Modal_Selector: ModalR,
     Customers_Selector: CustomersR,
+    Boilers_Selector: BoilersR,
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );
