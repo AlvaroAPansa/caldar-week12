@@ -9,8 +9,12 @@ import {
   filterData,
   deleteResource,
 } from "../../../redux/actions/tableActions";
+import { closeModal, openModal } from "../../../redux/actions/modalActions";
 
-// TODO cambiar el ENDPOINT_TECNHICIANS por lo que corresponda
+import YesNoMessage from "../../shared/YesNoMessage/YesNoMessage";
+import ScheduleDetail from "../ScheduleDetail/ScheduleDetail";
+
+
 import { ENDPOINT_APPOINTMENTS as BASE_ENDPOINT } from "../../../constants";
 
 function Schedule({ history }) {
@@ -22,9 +26,9 @@ function Schedule({ history }) {
   }, []);
 
   function handleOnSearch(e) {
-    const text = e.target.value;
-    // Filtra según los dataName definidos en headers
-    // Ej, se filatraría buscando en 3 columnas
+    const text = e.target.value.toLowerCase();
+ 
+
     dispatch(filterData(text, "start_timestamp", "buildingId", "boilerId"));
   }
 
@@ -66,22 +70,36 @@ function Schedule({ history }) {
             },
           ]}
           actions={[
-            // Acciones que hacer cada fila (creería que no hay que tocarlo)
+            
             {
-              fn: (id) => history.push(`${history.location.pathname}/${id}`),
+              fn: (item) =>
+                dispatch(openModal(<ScheduleDetail id={item.id} />)), // TODO cambiar detalle
               displayName: "✏", // Edita el recurso
-              hint: "Edit appoinment",
+              hint: "Edit schedule",
             },
             {
-              fn: (id) => dispatch(deleteResource(id)),
+              fn: (item) =>
+                dispatch(
+                  openModal(
+                    <YesNoMessage
+                      Technicians            title="Delete Appointment"
+                      message={`Are you sure you want to delete the Appointment ${item.id}`}
+                      onYes={() => {
+                        dispatch(deleteResource(item.id));
+                        dispatch(closeModal());
+                      }}
+                      onNo={() => dispatch(closeModal())}
+                    />
+                  )
+                ),
               displayName: "❌", // Borra el recurso
-              hint: "Delete appointment",
+              hint: "Delete Appointment",
             },
           ]}
         />
       )}
       <ButtonAdd
-        redirect={() => history.push(`${history.location.pathname}/new`)}
+        redirect={() => dispatch(openModal(<ScheduleDetail id={null} />))}
         title="Create new appointment"
       />
     </div>
@@ -89,4 +107,3 @@ function Schedule({ history }) {
 }
 
 export default Schedule;
-
