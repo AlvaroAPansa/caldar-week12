@@ -20,7 +20,7 @@ function Customers({history}) {
 
   function handleOnSearch(e) {
     const text = e.target.value.toLowerCase();
-    dispatch(filterData(text, "business_name", "contact_name", "email"));
+    dispatch(filterData(text, "businessName", "contactName", "email"));
   }
 
   return (
