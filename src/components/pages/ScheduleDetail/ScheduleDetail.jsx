@@ -84,7 +84,7 @@ function ScheduleDetail({ id }) {
                 <span>Maintenance Type</span>
                 <br />
                 <Field
-                  name="Preventive"
+                  name="maintenanceType"
                   component="input"
                   type="checkbox"
                   value="Preventive"
@@ -93,7 +93,7 @@ function ScheduleDetail({ id }) {
                 <label htmlFor="Preventive">Preventive</label>
                 <br />
                 <Field
-                  name="Eventual"
+                  name="maintenanceType"
                   component="input"
                   type="checkbox"
                   value="Eventual"
