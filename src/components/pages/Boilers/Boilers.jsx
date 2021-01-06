@@ -9,10 +9,13 @@ import {
   filterData,
   deleteResource,
 } from "../../../redux/actions/tableActions";
+import { closeModal, openModal } from "../../../redux/actions/modalActions";
+
+import YesNoMessage from "../../shared/YesNoMessage/YesNoMessage";
+import BoilerDetail from "../BoilerDetail/BoilerDetail";
 
 // TODO cambiar el ENDPOINT_TECNHICIANS por lo que corresponda
 import { ENDPOINT_BOILERS as BASE_ENDPOINT } from "../../../constants";
-import BoilerDetail from "../BoilerDetail/BoilerDetail";
 
 function Boilers({ history }) {
   const { data, loading, error } = useSelector((s) => s.Table_Selector);
@@ -64,12 +67,26 @@ function Boilers({ history }) {
           actions={[
             // Acciones que hacer cada fila (creería que no hay que tocarlo)
             {
-              fn: (id) => history.push(`${history.location.pathname}/${id}`),
+              fn: (item) =>
+                dispatch(openModal(<BoilerDetail id={item.id} />)), // TODO cambiar detalle
               displayName: "✏", // Edita el recurso
               hint: "Edit boiler",
             },
             {
-              fn: (id) => dispatch(deleteResource(id)),
+              fn: (item) =>
+                dispatch(
+                  openModal(
+                    <YesNoMessage
+                      title="Delete Boiler"
+                      message={`Are you sure you want to delete the boiler ${item.id}`}
+                      onYes={() => {
+                        dispatch(deleteResource(item.id));
+                        dispatch(closeModal());
+                      }}
+                      onNo={() => dispatch(closeModal())}
+                    />
+                  )
+                ),
               displayName: "❌", // Borra el recurso
               hint: "Delete boiler",
             },
@@ -77,7 +94,7 @@ function Boilers({ history }) {
         />
       )}
       <ButtonAdd
-        redirect={() => history.push(`${history.location.pathname}/new`)}
+        redirect={() => dispatch(openModal(<BoilerDetail id={null} />))}
         title="Create new boiler"
       />
     </div>
@@ -85,4 +102,5 @@ function Boilers({ history }) {
 }
 
 export default Boilers;
+
 
