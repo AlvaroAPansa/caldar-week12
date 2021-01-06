@@ -7,7 +7,7 @@ import {clearFields, fetchResourceList, handleSubmit} from "../../../redux/actio
 import { closeModal } from "../../../redux/actions/modalActions";
 import { updateTable } from "../../../redux/actions/tableActions";
 import Card from "../../shared/Card/Card";
-import { composeValidators, mustBeEmail, required } from "../../shared/FormInputs/formsValidations";
+import { composeValidators, mustBeEmail, mustBeNumString, required } from "../../shared/FormInputs/formsValidations";
 import { TextInput, DropdownInput } from "../../shared/FormInputs/FormInputs";
 
 function CustomerDetail( { id } ) {
@@ -90,7 +90,7 @@ function CustomerDetail( { id } ) {
                   />
                 )}
               </Field>
-              <Field name="buildings" validate={required}>
+              <Field name="buildings" validate={composeValidators(required, mustBeNumString)}>
                 {(props) => <TextInput {...props} label="Buildings" />}
               </Field>
               <div className={styles.buttons}>
