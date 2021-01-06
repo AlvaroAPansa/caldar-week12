@@ -14,5 +14,12 @@ export const mustBeEmail = (value) => {
 export const minValue = (min) => (value) =>
   isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
 
+export const mustBeNumString = (value) => {
+  const re = /^\d+(,\d+)*$/;
+  return re.test(value) 
+    ? undefined 
+    : "Must contain only numbers sepparated by a comma. No commas at the beginning or end"
+}
+
 export const composeValidators = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), undefined);

@@ -1,165 +1,120 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {Form, Field} from "react-final-form";
 import styles from "./CustomerDetail.module.css";
-import Header from "../../shared/Header/Header";
 import {ENDPOINT_CUSTOMERS as BASE_ENDPOINT} from "../../../constants";
-import {fetchResourceList, handleModifyFormData, handleSubmit} from "../../../redux/actions/customerActions";
+import {clearFields, fetchResourceList, handleSubmit} from "../../../redux/actions/customerActions";
+import { closeModal } from "../../../redux/actions/modalActions";
+import { updateTable } from "../../../redux/actions/tableActions";
+import Card from "../../shared/Card/Card";
+import { composeValidators, mustBeEmail, mustBeNumString, required } from "../../shared/FormInputs/formsValidations";
+import { TextInput, DropdownInput } from "../../shared/FormInputs/FormInputs";
 
-function CustomerDetail( {match, history} ) {
+function CustomerDetail( { id } ) {
   const {loading, error, formData} = useSelector(
     (s) => s.Customers_Selector
   );
 
   const dispatch = useDispatch();
 
+  const types = ["construction company","particular"];
+
   useEffect(() => {
+    dispatch(clearFields());
     dispatch(
       fetchResourceList({
-        isNew: match.url.endsWith("new"),
+        isNew: !id,
         url: {
-          GET: `${BASE_ENDPOINT}/${match.params.id}`,
-          PUT_POST: match.url.endsWith("new")
-          ? `${BASE_ENDPOINT}`
-          : `${BASE_ENDPOINT}/${match.params.id}`,
+          GET: `${BASE_ENDPOINT}/${id}`,
+          PUT_POST: !id ? `${BASE_ENDPOINT}` : `${BASE_ENDPOINT}/${id}`,
         },
       })
     );
-  }, [history]);
+  }, [id]);
 
-  function handleOnChange(e) {
-    dispatch(handleModifyFormData(e));
-  }
+  async function handleOnSubmit(values) {
 
-  function handleOnSubmit(e) {
-    e.preventDefault();
-
-    const parsedId = parseInt(formData.id);
-    let buildingsArray;
-      
-    if ((typeof formData.buildings) === "string") {
-      if (formData.buildings.length === 0) {
-        buildingsArray = new Array();
+    if ((typeof values.buildings) === "string") {
+      if (values.buildings.length === 0) {
+        values.buildings = new Array();
       } else {
-        buildingsArray = formData.buildings.replace(/, +/g, ",").split(",").map(Number);
+        values.buildings = values.buildings.split(",").map(Number);
       };
-    } else {
-      buildingsArray = formData.buildings;
     }
-
-    const parsedFormData = {
-      ...formData,
-      id: parsedId,
-      buildings: buildingsArray,
-    }
-
-    dispatch(handleSubmit(parsedFormData, history, match));
+ 
+    dispatch(
+      handleSubmit(values, () => {
+        dispatch(closeModal());
+        dispatch(updateTable());
+      })
+    );
   }
 
   return (
-    <div className={styles.container}>
-      <Header 
-        title={
-          match.url.endsWith("new")
-          ? "Create new customer"
-          : "Edit technician"
-        }
-      />
-      {loading && <h3>Loading...</h3>}
-      {error && <h3>{error}</h3>}
-      <div className={styles.card}>
-        <form onSubmit={handleOnSubmit}>
-          <label>
-            <span>ID</span>
-            <br/>
-            <input 
-              //disabled
-              type="text"
-              value={formData.id}
-              name="id"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Business Name</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.businessName}
-              name="businessName"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Contact Name</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.contactName}
-              name="contactName"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Email</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.email}
-              name="email"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Phone</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.phone}
-              name="phone"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Fiscal Address</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.fiscalAddress}
-              name="fiscalAddress"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Type</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.type}
-              name="type"
-              onChange={handleOnChange}
-            />
-          </label>
-          <label>
-            <span>Buildings</span>
-            <br/>
-            <input 
-              type="text"
-              value={formData.buildings}
-              name="buildings"
-              onChange={handleOnChange}
-            />
-          </label>
-          <div className={styles.buttons}>
-            <input
-              type="button"
-              value="Back"
-              onClick={() => history.goBack()}
-            />
-            <input type="submit" value="Confirm" />
-          </div>
-        </form>
+    <Card title={!id ? "Create new customer" : "Edit customer"}>
+      <div className={styles.container}>
+        {loading && <h3>Loading...</h3>}
+        {error && <h3>{error}</h3>}
+        <Form
+          onSubmit = {handleOnSubmit}
+          initialValues = {formData}
+          render={({handleSubmit, form, submitting, pristine}) => (
+            <form onSubmit={handleSubmit}>
+              <Field name="id">
+                {(props) => <TextInput {...props} label="Id" /*disabled*/ />}
+              </Field>
+              <Field name="businessName" validate={required}>
+                {(props) => <TextInput {...props} label="Business Name" />}
+              </Field>
+              <Field name="contactName" validate={required}>
+                {(props) => <TextInput {...props} label="Contact Name" />}
+              </Field>
+              <Field name="email" validate={composeValidators(required, mustBeEmail)}>
+                {(props) => <TextInput {...props} label="Email" />}
+              </Field>
+              <Field name="phone" validate={required}>
+                {(props) => <TextInput {...props} label="Phone" />}
+              </Field>
+              <Field name="fiscalAddress" validate={required}>
+                {(props) => <TextInput {...props} label="Fiscal Address" />}
+              </Field>
+              <Field name="type" validate={required}>
+                {(props) => (
+                  <DropdownInput 
+                    label="Type" 
+                    options={[
+                      { value: "construction company", displayName: "Construction Company" },
+                      { value: "particular", displayName: "Particular" },
+                    ]}
+                    {...props} 
+                  />
+                )}
+              </Field>
+              <Field name="buildings" validate={composeValidators(required, mustBeNumString)}>
+                {(props) => <TextInput {...props} label="Buildings" />}
+              </Field>
+              <div className={styles.buttons}>
+                <button type="button" onClick={() => dispatch(closeModal())}>
+                  Close
+                </button>
+                <br />
+                <button
+                  type="button"
+                  onClick={form.reset}
+                  disabled={submitting || pristine}
+                >
+                  Reset
+                </button>
+                <br />
+                <button type="submit" disabled={submitting || pristine}>
+                  OK
+                </button>
+              </div>
+            </form>
+          )}
+        />
       </div>
-    </div>
+    </Card>
   );
 }
 
