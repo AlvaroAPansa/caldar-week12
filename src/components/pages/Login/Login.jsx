@@ -4,7 +4,7 @@ import Card from "../../shared/Card/Card";
 import { TextInput } from "../../shared/FormInputs/FormInputs";
 import { required } from "../../shared/FormInputs/formsValidations";
 import Header from "../../shared/Header/Header";
-import loginWithFirebase from "../../../redux/actions/authActions";
+import { loginWithFirebase } from "../../../redux/actions/authActions";
 
 const Login = ({
   login
