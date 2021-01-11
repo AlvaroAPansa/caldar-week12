@@ -1,3 +1,5 @@
+import React from "react";
+import styles from "./Login.module.css";
 import { Field, Form } from "react-final-form";
 import { bindActionCreators } from "redux";
 import Card from "../../shared/Card/Card";
@@ -5,6 +7,7 @@ import { TextInput } from "../../shared/FormInputs/FormInputs";
 import { required } from "../../shared/FormInputs/formsValidations";
 import Header from "../../shared/Header/Header";
 import { loginWithFirebase } from "../../../redux/actions/authActions";
+import { connect } from "react-redux";
 
 const Login = ({
   login
@@ -46,4 +49,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch);
 };
 
-export default connect (null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

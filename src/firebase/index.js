@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import reduxStore from "../redux/store";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY || '',
@@ -13,7 +14,7 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const setToken = async (user) => {
-  const auth = store.getState().auth;
+  const auth = reduxStore.getState().auth;
   if (auth.authenticated) {
     const token = await user.getIdToken();
     localStorage.setItem('token', token);

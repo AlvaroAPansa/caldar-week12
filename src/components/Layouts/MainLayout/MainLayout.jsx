@@ -20,6 +20,7 @@ import { setAuthentication } from "../../../redux/actions/authActions";
 import { tokenListener } from "../../../firebase";
 import Login from "../../pages/Login/Login";
 import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 function MainLayout(authenticated, setAuthentication) {
   useEffect(() => {
@@ -79,7 +80,7 @@ function MainLayout(authenticated, setAuthentication) {
 
 const mapStateToProps = state => {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.Auth_Selector.authenticated
   };
 };
 

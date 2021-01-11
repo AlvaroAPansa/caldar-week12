@@ -8,6 +8,7 @@ import ModalR from "./reducers/modalReducer";
 import CustomersR from "./reducers/customersReducer";
 import BoilersR from "./reducers/boilersReducer"
 import ScheduleR from "./reducers/scheduleReducer";
+import AuthR from "./reducers/authReducers";
 
 export default createStore(
   combineReducers({
@@ -18,6 +19,7 @@ export default createStore(
     Customers_Selector: CustomersR,
     Boilers_Selector: BoilersR,
     Schedule_Selector: ScheduleR,
+    Auth_Selector: AuthR,
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );
