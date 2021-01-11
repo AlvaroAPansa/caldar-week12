@@ -27,7 +27,7 @@ const loginRejected = () => {
   }
 };
 
-const loginWithFirebase = credentials => dispatch => {
+export const loginWithFirebase = credentials => dispatch => {
   dispatch(loginFetching());
   return Firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
     .then(async (response) => {

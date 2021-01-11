@@ -16,7 +16,7 @@ import Home from "../../pages/Home/Home";
 import Modal from "../../shared/Modal/Modal";
 
 import { Switch, Route, Redirect } from "react-router-dom";
-import setAuthentication from "../../../redux/actions/authActions";
+import { setAuthentication } from "../../../redux/actions/authActions";
 import { tokenListener } from "../../../firebase";
 import Login from "../../pages/Login/Login";
 import { bindActionCreators } from "redux";
