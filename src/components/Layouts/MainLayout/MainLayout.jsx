@@ -23,6 +23,12 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 function MainLayout(authenticated, setAuthentication) {
+  
+  console.log("Authenticated:");
+  console.log(authenticated);
+  console.log("Set Authentication:");
+  console.log(setAuthentication);
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     if(token) {
@@ -34,7 +40,7 @@ function MainLayout(authenticated, setAuthentication) {
     tokenListener();
   }, []);
 
-  if (authenticated) {
+  if (authenticated.authenticated) {
     return (
       <div className={styles.webContainer}>
         <div className={styles.navbar}>

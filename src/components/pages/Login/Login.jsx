@@ -20,24 +20,26 @@ const Login = ({
     <React.Fragment>
       <Header title="Caldar APP" />
       <Card title={"Login"}>
-        <Form 
-          onSubmit={onSubmitLogin}
-          render={({ handleSubmit, form, submitting, pristine, values }) => (
-            <form onSubmit={handleSubmit}>
-              <Field name="email" validate={required}>
-                {(props) => <TextInput {...props} label="Email" />}
-              </Field>
-              <Field name="password" validate={required}>
-                {(props) => <TextInput {...props} label="Email" />}
-              </Field>
-              <div className={styles.buttons}>
-                <button type="submit" disabled={submitting || pristine}>
-                  Login
-                </button>
-              </div>
-            </form>
-          )}
-        />
+        <div className={styles.container}>
+          <Form 
+            onSubmit={onSubmitLogin}
+            render={({ handleSubmit, form, submitting, pristine, values }) => (
+              <form onSubmit={handleSubmit}>
+                <Field name="email" validate={required}>
+                  {(props) => <TextInput {...props} label="Email" />}
+                </Field>
+                <Field name="password" validate={required}>
+                  {(props) => <TextInput {...props} label="Password" />}
+                </Field>
+                <div className={styles.buttons}>
+                  <button type="submit" disabled={submitting || pristine}>
+                    Login
+                  </button>
+                </div>
+              </form>
+            )}
+          />
+        </div>
       </Card>
     </React.Fragment>
   )
