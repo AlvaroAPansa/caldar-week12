@@ -50,7 +50,7 @@ function Boilers({ history }) {
             },
             {
               order: 2,
-              displayName: "Type Id",
+              displayName: "Boiler type",
               dataName: "typeId",
             },
             {

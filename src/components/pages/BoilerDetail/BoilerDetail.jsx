@@ -68,10 +68,10 @@ function BoilerDetail({ id }) {
               </Field>
 
               <div className={styles.checkboxes}>
-                <span>Expertise</span>
+                <span>Boiler Type</span>
                 <br />
                 <Field
-                  name="expertise"
+                  name="typeId"
                   component="input"
                   type="checkbox"
                   value="A"
@@ -80,7 +80,7 @@ function BoilerDetail({ id }) {
                 <label htmlFor="A">A</label>
                 <br />
                 <Field
-                  name="expertise"
+                  name="typeId"
                   component="input"
                   type="checkbox"
                   value="B"
@@ -89,7 +89,7 @@ function BoilerDetail({ id }) {
                 <label htmlFor="B">B</label>
                 <br />
                 <Field
-                  name="expertise"
+                  name="typeId"
                   component="input"
                   type="checkbox"
                   value="C"
@@ -98,7 +98,7 @@ function BoilerDetail({ id }) {
                 <label htmlFor="C">C</label>
                 <br />
                 <Field
-                  name="expertise"
+                  name="typeId"
                   component="input"
                   type="checkbox"
                   value="D"
@@ -108,6 +108,8 @@ function BoilerDetail({ id }) {
               </div>
 
               <div className={styles.checkboxes}>
+              <span>Status</span>
+              <br />
               <Field
                   name="status"
                   component="input"

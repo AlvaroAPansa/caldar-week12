@@ -15,7 +15,7 @@ const initialState = {
     id: "",
     status: "",
     comment: "",
-    expertise: [],
+    typeId: "",
   },
 };
 
@@ -24,7 +24,7 @@ function refactorData(data) {
     id: data.id,
     status: data.status,
     comment: data.comment,
-    expertise: data.expertise,
+    typeId: data.typeId,
   };
 }
 
