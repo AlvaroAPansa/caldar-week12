@@ -13,7 +13,7 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-const setToken = async (user) => {
+export const setToken = async (user) => {
   const auth = reduxStore.getState().auth;
   if (auth.authenticated) {
     const token = await user.getIdToken();
