@@ -22,12 +22,7 @@ import Login from "../../pages/Login/Login";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-function MainLayout(authenticated, setAuthentication) {
-  
-  console.log("Authenticated:");
-  console.log(authenticated);
-  console.log("Set Authentication:");
-  console.log(setAuthentication);
+function MainLayout(authenticated) {
   
   useEffect(() => {
     const token = localStorage.getItem('token');
