@@ -1,7 +1,11 @@
-/* */
-.container {
-
+.cardContainer {
+  margin: 2rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.container {}
 
 
 .container h3 {
@@ -11,7 +15,7 @@
 
 .container form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 
   justify-content: center;
   align-items: center;
@@ -24,19 +28,15 @@
 
 .checkboxes input {
   margin-right: 0.4rem;
-
 }
 
 .buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 100%;
+  text-align: center;
 }
 
 .buttons button {
+  width: 70%;
   padding: 0.4rem 0.7rem;
-  margin-left: 1rem;
   border: none;
   background-color: var(--orange-bg);
   color: var(--white);
