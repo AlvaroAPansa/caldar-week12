@@ -7,6 +7,7 @@ import {
   FORM_SUBMIT_FAILURE,
   FETCH_RESOURCE_CLEAR_FIELDS,
 } from "../types/boilers";
+import { getHeaders } from "./tableActions";
 
 let urlServer = "";
 let isNewResource = true;
@@ -21,7 +22,7 @@ export function fetchResourceList({ isNew, url }) {
     dispatch(fetchResourceBegin());
 
     try {
-      const response = await fetch(urlServer.GET);
+      const response = await fetch(urlServer.GET,{headers: getHeaders(),});
       const json = await response.json();
       response.ok
         ? dispatch(fetchResourceSuccess(json))
@@ -64,9 +65,7 @@ export function handleSubmit(formData, onSuccess) {
 
     fetch(urlServer.PUT_POST, {
       method: isNewResource ? "POST" : "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: getHeaders(),
       body: JSON.stringify(formData),
     }).then(
       (r) => {

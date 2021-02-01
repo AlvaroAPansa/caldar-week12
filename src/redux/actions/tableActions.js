@@ -10,7 +10,7 @@ import {
 
 let url = "";
 
-const getHeaders = () => ({
+export const getHeaders = () => ({
   'Accept': 'application/json',
   'Content-Type': 'application/json',
   token: localStorage.getItem('token')
