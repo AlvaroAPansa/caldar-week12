@@ -2,8 +2,12 @@ import React from "react";
 import styles from "./Navbar.module.css";
 
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../redux/actions/authActions";
 
 function Navbar() {
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.container}>
       <nav>
@@ -37,6 +41,14 @@ function Navbar() {
             <NavLink activeClassName={styles.active} to="/reports">
               Reports
             </NavLink>
+          </li>
+          <li>
+            <button
+              className={styles.logOut}
+              onClick={() => dispatch(logout())}
+            >
+              Log Out
+            </button>
           </li>
         </ul>
       </nav>
