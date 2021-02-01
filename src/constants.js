@@ -1,4 +1,4 @@
-export const BACKEND_URL = "https://rr-caldar.herokuapp.com";
+export const BACKEND_URL = "https://rr-caldar.herokuapp.com/api";
 export const ENDPOINT_APPOINTMENTS = `${BACKEND_URL}/appointments`;
 export const ENDPOINT_BOILERS = `${BACKEND_URL}/boilers`;
 export const ENDPOINT_BOILERSTYPES = `${BACKEND_URL}/boilersTypes`;
