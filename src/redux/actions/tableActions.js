@@ -10,6 +10,12 @@ import {
 
 let url = "";
 
+export const getHeaders = () => ({
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  token: localStorage.getItem('token')
+});
+
 export function fetchResourceList(baseUrl) {
   return async (dispatch) => {
     if (!baseUrl) return dispatch(fetchResourceFailure("Error: Invalid URL"));
@@ -19,7 +25,9 @@ export function fetchResourceList(baseUrl) {
     dispatch(fetchResourceBegin());
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: getHeaders()
+      })
       const json = await response.json();
       response.ok
         ? dispatch(fetchResourceSuccess(json))
@@ -56,6 +64,7 @@ export function deleteResource(id) {
     dispatch(deleteResourceBegin());
     fetch(`${url}/${id}`, {
       method: "DELETE",
+      headers: getHeaders() 
     })
       .then((r) => {
         return r.ok
@@ -88,7 +97,9 @@ export function updateTable() {
     dispatch(fetchResourceBegin());
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: getHeaders()
+      })
       const json = await response.json();
       response.ok
         ? dispatch(fetchResourceSuccess(json))

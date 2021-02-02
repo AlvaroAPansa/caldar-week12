@@ -32,3 +32,20 @@
   list-style: none;
   text-align: center;
 }
+
+.container li:last-child {
+  margin-top: 3rem;
+}
+
+.container .logOut {
+  background-color: transparent;
+  color: var(--white);
+  border: none;
+  text-decoration: none;
+}
+
+.container .logOut:hover {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--font-color-secundary);
+}
